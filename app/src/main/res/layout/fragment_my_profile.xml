@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+
+                android:id="@+id/layout_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+
+                android:layout_alignParentTop="true"
+                android:onClick="goBack">
+                <ImageView
+                    android:id="@+id/icon_back"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_arrow_back_black_24dp" />
+
+            </LinearLayout
+                >
+
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@+id/layout_back"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="4dp"
+                android:padding="4dp"
+
+                android:text="Profile"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryP"
+                android:textSize="25sp"
+
+                android:textStyle="bold"
+                android:typeface="monospace" />
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textTitle">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginEnd="12dp"
+
+                android:layout_marginStart="12dp"
+                android:orientation="vertical">
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/account"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+
+                        android:fitsSystemWindows="true"
+                        android:padding="4dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/p"
+                        app:civ_border_color="@color/colorAccentP"
+                        app:civ_border_width="0dp" />
+
+
+                    <LinearLayout
+                      android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="bottom"
+                        android:layout_toEndOf="@+id/account"
+                        android:orientation="vertical">
+                      <TextView
+                          android:id="@+id/profile_rating_title"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Rating"
+
+
+                          android:textColor="@color/colorPrimaryP"
+                          android:textSize="22sp"
+                          android:textStyle="bold"
+                          android:typeface="monospace" />
+                      <LinearLayout
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+                          <TextView
+
+                              android:id="@+id/profile_rating"
+                              android:layout_width="wrap_content"
+
+                              android:layout_height="wrap_content"
+
+                              android:gravity="bottom"
+
+
+                              android:text="4.5 "
+                              android:textColor="@color/colorPrimaryP"
+                              android:textSize="22sp"
+                              android:textStyle="bold" />
+                          <TextView
+
+
+                              android:layout_width="wrap_content"
+
+
+                              android:layout_height="wrap_content"
+                              android:text="/s "
+                              android:textColor="@color/colorPrimaryP"
+                              android:textStyle="bold" />
+                      </LinearLayout>
+
+                  </LinearLayout>
+
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                      <LinearLayout
+                          android:id="@+id/profile_names"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                          <TextView
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginLeft="4dp"
+                              android:padding="4dp"
+                              android:text="First Name"
+                              android:textAlignment="center"
+
+                              android:textColor="@color/colorPrimaryP"
+                              android:textSize="25sp"
+                              android:textStyle="bold"
+                              android:typeface="monospace" />
+
+                          <TextView
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginLeft="4dp"
+                              android:padding="4dp"
+                              android:text="Second Name"
+                              android:textAlignment="center"
+
+                              android:textColor="@color/colorPrimaryP"
+                              android:textSize="20sp"
+                              android:textStyle="bold"
+                              android:typeface="monospace" />
+
+                      </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/profile_contacts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/profile_names"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical">
+                        <!--android:drawableStart="@drawable/ic_phone_iphone_black_24dp"-->
+                        <Button
+                            android:id="@+id/btn_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_border_transaparent"
+
+                            android:backgroundTint="@android:color/transparent"
+                            android:text="0714406984"
+                            android:textAlignment="viewStart" />
+                        <!--android:drawableStart="@drawable/ic_email_black_24dp"-->
+                        <Button
+                            android:id="@+id/btn_mail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_border_transaparent"
+                            android:backgroundTint="@android:color/transparent"
+
+                            android:text=" erickogi14@gmail.com"
+                            android:textAlignment="viewStart"
+                            android:textAllCaps="false" />
+                        <Button
+                            android:id="@+id/btn_zone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_border_transaparent"
+                            android:backgroundTint="@android:color/transparent"
+
+                            android:text=" Buru Buru Nairobi"
+                            android:textAlignment="viewStart"
+                            android:textAllCaps="false" />
+                        <Button
+                            android:id="@+id/btn_course"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_border_transaparent"
+                            android:backgroundTint="@android:color/transparent"
+
+                            android:text="French/Chemisty/Physics"
+                            android:textAlignment="viewStart"
+                            android:textAllCaps="false" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/profile_contacts"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical">
+
+                        <!--<Button-->
+                            <!--android:id="@+id/btn_profile_favorites"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:background="@drawable/rounded_border_accent"-->
+                            <!--android:text="@string/btn_profile_favorites"-->
+                            <!--android:textColor="@android:color/white" />-->
+
+                        <Button
+                            android:id="@+id/btn_profile_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/rounded_border_accent"
+                            android:text="Edit Profile"
+                            android:textColor="@android:color/white" />
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+            </ScrollView>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

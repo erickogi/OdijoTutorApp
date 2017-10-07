@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:id="@+id/service_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:elevation="3dp"
+
+
+        android:padding="8dp"
+
+        app:cardCornerRadius="3dp"
+        >
+
+
+
+        <RelativeLayout
+            android:padding="4dp"
+            android:layout_marginTop="4dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="4dp"
+                android:src="@drawable/p" />
+            <RelativeLayout
+                android:id="@+id/relative_chat"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:padding="4dp"
+                                android:id="@+id/txt_odijo_name"
+
+                                android:textColor="@android:color/black"
+                                android:text="Full Odijo Names  "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                            <!--<TextView-->
+                            <!--android:id="@+id/txtMessageNo"-->
+                            <!--android:layout_marginLeft="4dp"-->
+                            <!--android:text="(10)"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
+                        </LinearLayout>
+                        <TextView
+                            android:padding="4dp"
+                            android:id="@+id/txt_last_date"
+                            android:layout_marginEnd="4dp"
+                            android:layout_alignParentEnd="true"
+                            android:text="9/24/17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:padding="6dp"
+                        android:layout_marginBottom="2dp"
+                        android:id="@+id/txt_last_message"
+                        android:layout_marginTop="6dp"
+                        android:text="Okay thank you i will do that"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+
+
+
+                <View
+                    android:padding="4dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+
+                    android:background="@color/line" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

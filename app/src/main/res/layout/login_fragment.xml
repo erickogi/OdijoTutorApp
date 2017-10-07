@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+
+        >
+        <!--app:hintTextAppearance="@style/EditTextHintStyle"-->
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txt_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/white"
+            android:hint="@string/username_email_hint"
+            android:inputType="textEmailAddress" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/white"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+<LinearLayout
+
+    android:layout_marginTop="45dp"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:onClick="loginBtnPressed"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:text="Login"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_border_accent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <ImageButton
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+
+       android:scaleType="centerCrop"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/sign_in_large_default"
+        android:background="@drawable/rounded_linkedin"
+        android:textColor="@android:color/white"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>
+
+</LinearLayout>
