@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "475726897233",
+    "firebase_url": "https://odijotutorapp-45e22.firebaseio.com",
+    "project_id": "odijotutorapp-45e22",
+    "storage_bucket": "odijotutorapp-45e22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475726897233:android:7a505888633143f0",
+        "android_client_info": {
+          "package_name": "com.erickogi14gmail.odijotutorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475726897233-b8vbl0h3d3meum4393t91j0uhauofkbq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.erickogi14gmail.odijotutorapp",
+            "certificate_hash": "e0491424e67c5cefd7fcaf4157d6fccb2aecb848"
+          }
+        },
+        {
+          "client_id": "475726897233-s6687jj12o3dv0d85gp7m3tck7pfg6cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR7wVP2AsQ0nQU9FLD8RoklZwE_yt0E5Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475726897233-s6687jj12o3dv0d85gp7m3tck7pfg6cd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

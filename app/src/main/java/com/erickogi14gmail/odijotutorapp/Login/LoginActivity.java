@@ -1,32 +1,96 @@
 package com.erickogi14gmail.odijotutorapp.Login;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
+import com.erickogi14gmail.odijotutorapp.Helper.PrefManager;
 import com.erickogi14gmail.odijotutorapp.MainActivity;
 import com.erickogi14gmail.odijotutorapp.R;
 
 public class LoginActivity extends AppCompatActivity {
     public static Fragment fragment = null;
     ProgressDialog    progressDialog;
+    SignUpFragment signUpFragment;
+    private PrefManager pref;
+    private BroadcastReceiver codeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("closeoperation", "truecode received");
+            if (intent.getAction().equals("com.odijo.codereceived")) {
+                try {
+                    // Intent hhtpIntent = new Intent(LoginActivity.this, HttpService.class);
+                    // hhtpIntent.putExtra("otp", intent.getExtras().getString("code"));
+
+                    //startService(hhtpIntent);
+
+                    signUpFragment = (SignUpFragment) getSupportFragmentManager().findFragmentByTag("fragmentsignup");
+                    signUpFragment.setText(intent.getExtras().getString("code"));
+
+
+                    //signUpFragment.setText("23432");
+                } catch (NullPointerException nm) {
+                    nm.printStackTrace();
+                }
+
+            }
+
+        }
+    };
+    private BroadcastReceiver closeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("closeoperation", "close received");
+
+            if (intent.getAction().equals("com.odijo.close")) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
+        }
+    };
+
+    //    public void otpSending(Intent grapprIntent) {
+//
+//        startService(grapprIntent);
+//
+//    }
+    private static boolean isValidPhoneNumber(String mobile) {
+        String regEx = "^[0-9]{10}$";
+        return mobile.matches(regEx);
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        pref = new PrefManager(this);
+
+        registerReceiver(codeReceiver, new IntentFilter("com.odijo.codereceived"));
+        registerReceiver(closeReceiver, new IntentFilter("com.odijo.close"));
+
 
         fragment = new WelcomFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment, "fragmentWelcome").commit();
+        //}
     }
 
     void setUpView() {
@@ -47,8 +111,12 @@ public class LoginActivity extends AppCompatActivity {
 
     public void newAccountBtnPressed(View view) {
         popOutFragments();
-        fragment=new SignUpFragment();
-        setUpView();
+        fragment = new SignUpFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment, "fragmentsignup").commit();
+
+        signUpFragment = (SignUpFragment) getSupportFragmentManager().findFragmentByTag("fragmentsignup");
+
 
     }
 
@@ -59,43 +127,22 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
         progressDialog.show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog.dismiss();;
-                SharedPreferences sharedPreferences = getSharedPreferences("odijotutorloginStatus", Context.MODE_PRIVATE);
-
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-
-                editor.putBoolean("loginStaus", true);
-
-
-
-                editor.commit();
-
-
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
-
-            }
-
-        },1000);
-
-
-
-
-
-
-
 
 
     }
 
     public void newloginBtnPressed(View view) {
         popOutFragments();
-        fragment=new LoginFragment();
+        fragment = new LoginFragment();
         setUpView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(closeReceiver);
+
+        unregisterReceiver(codeReceiver);
+
     }
 }

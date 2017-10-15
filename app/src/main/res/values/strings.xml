@@ -15,4 +15,7 @@
     <string name="last_name_hint">Last Name</string>
     <string name="email_hint">Email</string>
     <string name="app_label">Odijo</string>
+    <string name="rate_ksh_hr">Rate(KSH)/HR</string>
+    <string name="level">Level</string>
+    <string name="qualifications">qualifications</string>
 </resources>

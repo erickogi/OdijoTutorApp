@@ -36,7 +36,9 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-
+    <style name="EditTextHintStyleProfile" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
 
 
 

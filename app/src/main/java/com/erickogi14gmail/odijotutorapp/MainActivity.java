@@ -1,31 +1,36 @@
 package com.erickogi14gmail.odijotutorapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.view.Gravity;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.erickogi14gmail.odijotutorapp.Helper.PrefManager;
 import com.erickogi14gmail.odijotutorapp.Main.FragmentRequests;
 import com.erickogi14gmail.odijotutorapp.Messaging.MessagingActivity;
 import com.erickogi14gmail.odijotutorapp.Profile.FragmentMyProfile;
 import com.erickogi14gmail.odijotutorapp.Receipt.FragmentReceiptList;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.HashMap;
 
 import q.rorbin.badgeview.QBadgeView;
 
@@ -35,11 +40,28 @@ public class MainActivity extends AppCompatActivity
     private QBadgeView qBadgeView;
     private AppBarLayout mAppBarLayout;
     private TextView textViewUpcoming;
+    private PrefManager prefManager;
+    private TextView name, email;
+    private ImageView img;
 
+    public Bitmap getThumbnail(String filename) {
+        Bitmap thumnail = BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_person_black_24dp);
+        try {
+            File filepath = this.getFileStreamPath(filename);
+            FileInputStream fi = new FileInputStream(filepath);
+            thumnail = BitmapFactory.decodeStream(fi);
+
+        } catch (Exception m) {
+            m.printStackTrace();
+        }
+        return thumnail;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        prefManager = new PrefManager(MainActivity.this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.drawable.ic_school_icon100dp);
         FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.fab);
@@ -60,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mAppBarLayout.setElevation(0);
         }
+
 
         fragment = new FragmentRequests();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -83,6 +106,28 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        View header = navigationView.getHeaderView(0);
+/*View view=navigationView.inflateHeaderView(R.layout.nav_header_main);*/
+        HashMap<String, String> hashMap = prefManager.getUserDetails();
+
+
+        name = (TextView) header.findViewById(R.id.username);
+        email = (TextView) header.findViewById(R.id.email);
+        name.setText(hashMap.get("name"));
+        email.setText(hashMap.get("email"));
+
+        img = (ImageView) header.findViewById(R.id.imageView);
+        String image = prefManager.getImg();
+        //Toast.makeText(getContext(), ""+image, Toast.LENGTH_SHORT).show();
+
+        if (!image.equals("null")) {
+            img.setImageBitmap(getThumbnail(image));
+        } else {
+
+        }
+
     }
 
     @Override
@@ -141,18 +186,9 @@ else if (id == R.id.nav_home) {
     popOutFragments();
     // setUpView();
 }else if (id == R.id.nav_logout) {
-    SharedPreferences sharedPreferences = getSharedPreferences("odijotutorloginStatus", Context.MODE_PRIVATE);
-
-
-    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-
-    editor.putBoolean("loginStaus", false);
-
-
-    editor.commit();
-    startActivity(new Intent(MainActivity.this, SplashScreen.class));
-    finish();
+            prefManager.clearSession();
+            startActivity(new Intent(MainActivity.this, SplashScreen.class));
+            finish();
 
 }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

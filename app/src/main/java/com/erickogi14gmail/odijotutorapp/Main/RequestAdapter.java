@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.erickogi14gmail.odijotutorapp.R;
 import com.squareup.picasso.Picasso;
@@ -43,12 +41,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
     @Override
     public void onBindViewHolder(RequestAdapter.MyViewHolder holder, int position) {
         RequestPojo requestPojo=modelList.get(position);
-        holder.txtClientName.setText(requestPojo.getClient_name());
-        holder.txtClientZone.setText(requestPojo.getClient_zone());
-        holder.txtRequestDate.setText(requestPojo.getRequest_date());
-        holder.txtRequestTime.setText(requestPojo.getRequest_startDate()+"-"+requestPojo.getRequest_endDate());
+        holder.txtClientName.setText(requestPojo.getStudent_name());
+        holder.txtClientZone.setText(requestPojo.getZone());
+        holder.txtRequestDate.setText(requestPojo.getDate());
+        holder.txtRequestTime.setText(requestPojo.getTime());
+        holder.txtSubject.setText(requestPojo.getSubject_name());
 
-        Picasso.with(context).load(R.drawable.p).resize(60,60).centerCrop().into(holder.imgClientProfile);
+        Picasso.with(context).load(requestPojo.getStudent_image()).resize(60, 60).centerCrop().error(R.drawable.ic_person_black_24dp).into(holder.imgClientProfile);
         if(requestPojo.getStatus()==0){
             holder.btnAccept.setEnabled(true);
             holder.btnDecline.setEnabled(true);
@@ -77,7 +76,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView txtClientName,txtClientZone,txtRequestDate,txtRequestTime;
+        private TextView txtClientName, txtClientZone, txtRequestDate, txtRequestTime, txtSubject;
         private ImageView imgClientProfile,imgMore;
         private Button btnAccept,btnDecline;
         private WeakReference<ClickListenerRequestCard> listenerWeakReference;
@@ -86,6 +85,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         public MyViewHolder(View itemView,ClickListenerRequestCard listener) {
             super(itemView);
             listenerWeakReference=new WeakReference<ClickListenerRequestCard>(listener);
+            txtSubject = (TextView) itemView.findViewById(R.id.txt_subject);
 
             txtClientName=(TextView)itemView.findViewById(R.id.txt_client_name);
             txtClientZone=(TextView)itemView.findViewById(R.id.txt_location);
@@ -113,16 +113,18 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
             switch (v.getId()){
                 case R.id.btn_accept:
                     if(btnAccept.getText().toString().equals("ACCEPTED")){
-                        btnAccept.setEnabled(false);
+                        //  btnAccept.setEnabled(false);
+                        listenerWeakReference.get().onBtnAcceptClicked(getAdapterPosition(), btnAccept, btnDecline);
+
                     }else {
-                        int a = modelList.get(getAdapterPosition()).getClient_id();
+                        int a = modelList.get(getAdapterPosition()).getId();
 
                         listenerWeakReference.get().onBtnAcceptClicked(getAdapterPosition(), btnAccept, btnDecline);
                     }
                     break;
                 case R.id.btn_decline:
                     if(btnDecline.getText().toString().equals("DECLINED")){
-                        btnDecline.setEnabled(false);
+                        // btnDecline.setEnabled(false);
                     }else {
                         listenerWeakReference.get().onBtnDeclineClicked(getAdapterPosition(), btnDecline, btnAccept);
                     }

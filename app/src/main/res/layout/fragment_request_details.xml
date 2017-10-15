@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textTitle">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginEnd="12dp"
+
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="140dp"
+                            android:layout_height="140dp"
+                            android:layout_centerHorizontal="true"
+
+                            android:fitsSystemWindows="true"
+                            android:padding="4dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/p"
+                            app:civ_border_color="@color/colorAccentP"
+                            app:civ_border_width="0dp" />
+
+
+                        <!--<LinearLayout-->
+                        <!--android:visibility="gone"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:layout_gravity="bottom"-->
+                        <!--android:layout_toEndOf="@+id/imageView"-->
+                        <!--android:orientation="vertical">-->
+                        <!--<TextView-->
+                        <!--android:id="@+id/profile_rating_title"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="@string/txt_your_rating_profile"-->
+
+
+                        <!--android:textColor="@color/colorPrimaryP"-->
+                        <!--android:textSize="22sp"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:typeface="monospace" />-->
+                        <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal">-->
+                        <!--<TextView-->
+
+                        <!--android:id="@+id/profile_rating"-->
+                        <!--android:layout_width="wrap_content"-->
+
+                        <!--android:layout_height="wrap_content"-->
+
+                        <!--android:gravity="bottom"-->
+
+
+                        <!--android:text="4.5 "-->
+                        <!--android:textColor="@color/colorPrimaryP"-->
+                        <!--android:textSize="22sp"-->
+                        <!--android:textStyle="bold" />-->
+                        <!--<TextView-->
+
+
+                        <!--android:layout_width="wrap_content"-->
+
+
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="/s "-->
+                        <!--android:textColor="@color/colorPrimaryP"-->
+                        <!--android:textStyle="bold" />-->
+                        <!--</LinearLayout>-->
+
+                        <!--</LinearLayout>-->
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/profile_names"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txt_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+                                android:padding="4dp"
+                                android:text="First Name"
+                                android:textAlignment="center"
+
+                                android:textColor="@color/colorPrimaryP"
+                                android:textSize="25sp"
+                                android:textStyle="bold"
+                                android:typeface="monospace" />
+
+                            <!--<TextView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="4dp"-->
+                            <!--android:padding="4dp"-->
+                            <!--android:text="Second Name"-->
+                            <!--android:textAlignment="center"-->
+
+                            <!--android:textColor="@color/colorPrimaryP"-->
+                            <!--android:textSize="20sp"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:typeface="monospace" />-->
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/profile_contacts"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/profile_names"
+                            android:layout_marginTop="12dp"
+                            android:orientation="vertical">
+                            <!--android:drawableStart="@drawable/ic_phone_iphone_black_24dp"-->
+                            <Button
+                                android:id="@+id/btn_phone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_border_transaparent"
+
+                                android:backgroundTint="@android:color/transparent"
+                                android:text="0714406984"
+                                android:textAlignment="viewStart" />
+                            <!--android:drawableStart="@drawable/ic_email_black_24dp"-->
+                            <Button
+                                android:id="@+id/btn_mail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_border_transaparent"
+                                android:backgroundTint="@android:color/transparent"
+
+                                android:text=" erickogi14@gmail.com"
+                                android:textAlignment="viewStart"
+                                android:textAllCaps="false" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+
+
+                                android:orientation="horizontal"
+                                android:padding="4dp">
+
+
+                                <TextView
+                                    android:id="@+id/txt_odijo_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Location : "
+                                    android:textColor="@android:color/black"
+                                    android:visibility="gone"
+
+                                    />
+
+                                <TextView
+                                    android:id="@+id/txt_location"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="2dp"
+                                    android:text="Buru Buru Estate"
+                                    android:textColor="@android:color/black" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+
+                                android:orientation="horizontal"
+                                android:padding="4dp">
+
+
+                                <TextView
+                                    android:id="@+id/txt_odijo_subjec"
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="For  : "
+                                    android:textColor="@android:color/black"
+                                    android:visibility="gone"
+
+                                    />
+
+                                <TextView
+                                    android:id="@+id/txt_subject"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="2dp"
+                                    android:text="Mathematics"
+                                    android:textColor="@android:color/black" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+
+                                android:orientation="horizontal"
+                                android:padding="4dp">
+
+                                <TextView
+                                    android:id="@+id/txt_date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="12/11/2017"
+                                    android:textColor="@android:color/black" />
+
+
+                                <TextView
+                                    android:id="@+id/txt_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="14:30 - 16:00 "
+                                    android:textColor="@android:color/black"
+
+                                    />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:background="@drawable/rounded_border_transaparent"
+
+
+                                android:orientation="horizontal"
+                                android:padding="4dp">
+
+                                <TextView
+
+                                    android:id="@+id/txt_message"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/lorem_ipsum"
+                                    android:textColor="@android:color/black" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/profile_contacts"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <!--<Button-->
+                            <!--android:id="@+id/btn_profile_favorites"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:background="@drawable/rounded_border_accent"-->
+                            <!--android:text="@string/btn_profile_favorites"-->
+                            <!--android:textColor="@android:color/white" />-->
+                            <Button
+                                android:id="@+id/btn_decline"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_border_accent"
+                                android:text="DECLINE"
+                                android:textColor="@android:color/white" />
+
+                            <Button
+                                android:id="@+id/btn_accept"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_border_accent"
+                                android:text="Accept"
+                                android:textColor="@android:color/white" />
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+            </ScrollView>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

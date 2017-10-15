@@ -7,31 +7,91 @@ import java.io.Serializable;
  */
 
 public class RequestPojo implements Serializable {
-    private int request_id;
-    private int client_id;
-    private String client_name;
-    private String client_zone;
-    private String client_rating;
-    private String client_image;
-    private String request_date;
-    private String request_startDate;
-    private String request_endDate;
 
+
+    private int id;
+    private String to;
+    private String from;
+    private String message;
+    private String date;
+    private String time;
+    private String subnitted;
     private int status;
+    private String zone;
+
+    private String student_name;
+    private String student_email;
+    private String student_mobile;
+    private String student_image;
+    private String student_zone;
+    private String subject;
+
 
     public RequestPojo() {
     }
 
-    public RequestPojo(int request_id, int client_id, String client_name, String client_zone, String client_rating, String client_image, String request_date, String request_startDate, String request_endDate) {
-        this.request_id = request_id;
-        this.client_id = client_id;
-        this.client_name = client_name;
-        this.client_zone = client_zone;
-        this.client_rating = client_rating;
-        this.client_image = client_image;
-        this.request_date = request_date;
-        this.request_startDate = request_startDate;
-        this.request_endDate = request_endDate;
+    public String getSubject_name() {
+        return subject;
+    }
+
+    public void setSubject_name(String subject_name) {
+        this.subject = subject_name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getSubnitted() {
+        return subnitted;
+    }
+
+    public void setSubnitted(String subnitted) {
+        this.subnitted = subnitted;
     }
 
     public int getStatus() {
@@ -42,75 +102,51 @@ public class RequestPojo implements Serializable {
         this.status = status;
     }
 
-    public int getRequest_id() {
-        return request_id;
+    public String getZone() {
+        return zone;
     }
 
-    public void setRequest_id(int request_id) {
-        this.request_id = request_id;
+    public void setZone(String zone) {
+        this.zone = zone;
     }
 
-    public int getClient_id() {
-        return client_id;
+    public String getStudent_name() {
+        return student_name;
     }
 
-    public void setClient_id(int client_id) {
-        this.client_id = client_id;
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
     }
 
-    public String getClient_name() {
-        return client_name;
+    public String getStudent_email() {
+        return student_email;
     }
 
-    public void setClient_name(String client_name) {
-        this.client_name = client_name;
+    public void setStudent_email(String student_email) {
+        this.student_email = student_email;
     }
 
-    public String getClient_zone() {
-        return client_zone;
+    public String getStudent_mobile() {
+        return student_mobile;
     }
 
-    public void setClient_zone(String client_zone) {
-        this.client_zone = client_zone;
+    public void setStudent_mobile(String student_mobile) {
+        this.student_mobile = student_mobile;
     }
 
-    public String getClient_rating() {
-        return client_rating;
+    public String getStudent_image() {
+        return student_image;
     }
 
-    public void setClient_rating(String client_rating) {
-        this.client_rating = client_rating;
+    public void setStudent_image(String student_image) {
+        this.student_image = student_image;
     }
 
-    public String getClient_image() {
-        return client_image;
+    public String getStudent_zone() {
+        return student_zone;
     }
 
-    public void setClient_image(String client_image) {
-        this.client_image = client_image;
-    }
-
-    public String getRequest_date() {
-        return request_date;
-    }
-
-    public void setRequest_date(String request_date) {
-        this.request_date = request_date;
-    }
-
-    public String getRequest_startDate() {
-        return request_startDate;
-    }
-
-    public void setRequest_startDate(String request_startDate) {
-        this.request_startDate = request_startDate;
-    }
-
-    public String getRequest_endDate() {
-        return request_endDate;
-    }
-
-    public void setRequest_endDate(String request_endDate) {
-        this.request_endDate = request_endDate;
+    public void setStudent_zone(String student_zone) {
+        this.student_zone = student_zone;
     }
 }
