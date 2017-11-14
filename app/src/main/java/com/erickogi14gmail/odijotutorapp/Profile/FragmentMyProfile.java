@@ -1,5 +1,6 @@
 package com.erickogi14gmail.odijotutorapp.Profile;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class FragmentMyProfile extends Fragment {
         btnEdit = (Button) view.findViewById(R.id.btn_profile_edit_profile);
 
         img = (ImageView) view.findViewById(R.id.imageView);
-        String image = prefManager.getImg();
+        final String image = prefManager.getImg();
         //Toast.makeText(getContext(), ""+image, Toast.LENGTH_SHORT).show();
 
         if (!image.equals("null")) {
@@ -102,7 +103,21 @@ public class FragmentMyProfile extends Fragment {
 
                 fragment.setArguments(args);
                 // popOutFragments();
-                setUpView();
+               // setUpView();
+
+                Intent intent=new Intent(getActivity(),EditProfile.class);
+                intent.putExtra("Name", hashMap.get("name"));
+                intent.putExtra("Email", hashMap.get("email"));
+                intent.putExtra("Zones", zones);
+                intent.putExtra("zone", zoneId);
+                intent.putExtra("mobile", hashMap.get("mobile"));
+                intent.putExtra("description", hashMap.get("description"));
+                intent.putExtra("work_hours", hashMap.get("work_hours"));
+                intent.putExtra("data", subjectses);
+
+
+                startActivity(intent);
+
             }
         });
 

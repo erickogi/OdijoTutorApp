@@ -129,6 +129,9 @@ public class PrefManager {
 
         editor.commit();
     }
+    public boolean isProfileSet(){
+        return pref.getBoolean(KEY_PROFILE_SET,false);
+    }
 
     public void saveSubjects(ArrayList<Subjects> subjectses) {
         Gson gson = new Gson();

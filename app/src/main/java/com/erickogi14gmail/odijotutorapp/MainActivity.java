@@ -84,9 +84,16 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        fragment = new FragmentRequests();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment, "fragmentRequests").commit();
+        if(prefManager.isProfileSet()) {
+            fragment = new FragmentRequests();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment, "fragmentRequests").commit();
+        }else {
+            fragment = new FragmentMyProfile();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment, "fragmentProfile").commit();
+        }
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();

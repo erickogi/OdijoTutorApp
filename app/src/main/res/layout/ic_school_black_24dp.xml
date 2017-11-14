@@ -3,7 +3,7 @@
         android:height="70dp"
 
         android:viewportWidth="24.0"
-        android:viewportHeight="24.0">
+        android:viewportHeight="24.0" android:layout_height="70dp" android:layout_width="70dp">
     <path
 
         android:strokeColor="@color/colorPrimaryP"

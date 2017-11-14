@@ -1,6 +1,7 @@
 package com.erickogi14gmail.odijotutorapp.Profile;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Eric on 10/11/2017.
@@ -15,11 +16,21 @@ public class Subjects implements Serializable {
     private String level;
     private String qualifications;
 
+    private ArrayList<Levels> levelses;
+
     public Subjects(int subject_id, String subject_name) {
 
         this.subject_id = subject_id;
         this.subject_name = subject_name;
 
+    }
+
+    public ArrayList<Levels> getLevelses() {
+        return levelses;
+    }
+
+    public void setLevelses(ArrayList<Levels> levelses) {
+        this.levelses = levelses;
     }
 
     public Subjects() {

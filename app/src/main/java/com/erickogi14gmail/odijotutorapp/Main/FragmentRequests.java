@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -65,6 +66,8 @@ public class FragmentRequests extends Fragment {
         swipe_refresh_layout.setColorSchemeResources(android.R.color.white, android.R.color.holo_purple, android.R.color.white);
 
         swipe_refresh_layout.setRefreshing(true);
+
+
 
         swipe_refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -207,8 +210,7 @@ public class FragmentRequests extends Fragment {
         return requestpojos;
     }
     private void initViews(){
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+      recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         requestAdapter =new RequestAdapter(getContext(), requestpojos, new ClickListenerRequestCard() {
             @Override
             public void onCardClicked(int position) {
@@ -253,6 +255,16 @@ public class FragmentRequests extends Fragment {
         recyclerView.setLayoutManager(mStaggeredLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(requestAdapter);
+        LinearLayout  linearLayoutEmpty = (LinearLayout) view.findViewById(R.id.empty_layout);
+
+        if (requestAdapter.getItemCount() > 0) {
+            linearLayoutEmpty.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+
+        } else {
+            linearLayoutEmpty.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
 
         try {
             final FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
