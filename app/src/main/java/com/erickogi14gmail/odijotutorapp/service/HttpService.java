@@ -69,10 +69,10 @@ public class HttpService extends IntentService {
                         String email = profileObj.getString("email");
                         String mobile = profileObj.getString("mobile");
                         String ZONE = profileObj.getString("zone");
+                        String id = profileObj.getString("id");
 
                         PrefManager pref = new PrefManager(getApplicationContext());
-                        pref.createLogin(name, email, mobile, ZONE, "", "");
-
+                        pref.createLogin(name, email, mobile, ZONE, "", "", id);
 
                         Intent intent2 = new Intent("com.odijo.close");
 

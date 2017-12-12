@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <ImageView
+        android:id="@+id/phone_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:padding="16dp"
+        android:src="@drawable/phone" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phone_img"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/txt_call_us_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/ubuntu_bold"
+            android:padding="6dp"
+            android:text="@string/call_us_on"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/phone_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_call_us_on"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:fontFamily="@font/ubuntu_bold"
+            android:padding="6dp"
+            android:text="@string/phone_1"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="wrap_content"
+            android:layout_height="4dp"
+            android:layout_below="@+id/phone_no"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="150dp"
+            android:layout_marginStart="50dp"
+            android:background="@color/line"
+            android:padding="4dp"
+            android:paddingBottom="6dp"
+
+            android:paddingEnd="20dp"
+
+            android:paddingStart="20dp" />
+
+        <TextView
+            android:id="@+id/txt_or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line1"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/ubuntu_bold"
+            android:padding="6dp"
+            android:text="0r"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+
+        <TextView
+            android:id="@+id/phone_no_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_or"
+            android:layout_centerHorizontal="true"
+
+            android:clickable="true"
+            android:fontFamily="@font/ubuntu_bold"
+            android:padding="6dp"
+            android:text="@string/phone_n2"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="4dp"
+            android:layout_below="@+id/phone_no_2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="150dp"
+            android:layout_marginStart="50dp"
+            android:background="@color/line"
+            android:padding="4dp"
+
+            android:paddingEnd="20dp"
+
+            android:paddingStart="20dp" />
+
+
+        <TextView
+            android:id="@+id/call_desc"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line2"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/ubuntu_bold"
+            android:gravity="center"
+            android:paddingEnd="50dp"
+            android:paddingStart="50dp"
+            android:paddingTop="6dp"
+            android:text="@string/call_desc"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+
+        <ImageView
+            android:id="@+id/mail_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/call_desc"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="20dp"
+            android:src="@drawable/mail" />
+
+        <TextView
+            android:id="@+id/txt_email_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mail_img"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="@string/drop_us_an_email_at"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_email_desc"
+            android:layout_centerHorizontal="true"
+
+            android:clickable="true"
+            android:fontFamily="@font/ubuntu_bold"
+            android:padding="6dp"
+            android:text="@string/odijo_email"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="wrap_content"
+            android:layout_height="4dp"
+            android:layout_below="@+id/email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="150dp"
+            android:background="@color/line"
+
+            android:paddingEnd="20dp" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

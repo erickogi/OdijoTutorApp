@@ -19,10 +19,34 @@
     </style>
 
 
+    <style name="MyApp.ActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar">
+        <item name="elevation">0dp</item>
+        <!-- style for actionBar title -->
+        <item name="titleTextStyle">@style/ActionBarTitleText</item>
+        <!-- style for actionBar subtitle -->
+        <item name="subtitleTextStyle">@style/ActionBarSubtitleText</item>
+
+        <!--
+        the actionBarTheme doesn't use the colorControlNormal attribute
+        <item name="colorControlNormal">@color/my_awesome_color</item>
+         -->
+    </style>
+
+    <style name="ActionBarTitleText" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- THIS is where you can color the arrow! -->
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="ActionBarSubtitleText" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- THIS is where you can color the arrow! -->
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
 
 
-
-
+    <style name="MyApp.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- THIS is where you can color the arrow! -->
+        <item name="colorControlNormal">@color/colorPrimary</item>
+    </style>
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/colorPrimaryP</item>
     </style>
@@ -39,11 +63,6 @@
     <style name="EditTextHintStyleProfile" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
-
-
-
-
-
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

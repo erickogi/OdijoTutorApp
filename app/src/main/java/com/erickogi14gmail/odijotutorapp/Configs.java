@@ -26,30 +26,32 @@ public class Configs {
     public static final String OTP_DELIMITER = ":";
 
 
+    private static final String BASE_URL = "http://www.erickogi.co.ke/Sumuni/";
+
+    public static final String REGISTER_URL = BASE_URL + "Login/Register.php";
+
+    public static final String UPDATE_PROFILE_URL = BASE_URL + "Login/Update_Profile.php";
+
+    public static final String VERIFY_OTP_URL = BASE_URL + "Login/Verify_otp.php";
 
 
-    public static final String REGISTER_URL = "http://www.erickogi.co.ke/Sumuni/Login/Register.php";
-
-    public static final String UPDATE_PROFILE_URL = "http://www.erickogi.co.ke/Sumuni/Login/Update_Profile.php";
-
-    public static final String VERIFY_OTP_URL = "http://www.erickogi.co.ke/Sumuni/Login/Verify_otp.php";
+    public static final String LOGIN_URL = BASE_URL + "Login/Login.php";
 
 
-    public static final String LOGIN_URL = "http://www.erickogi.co.ke/Sumuni/Login/Login.php";
+    public static final String GET_ALL_TUTORS_URL = BASE_URL + "Subjects/FindTutors.php";
+    public static final String GET_SUBJECTS_URL = BASE_URL + "Subjects/Get_Levels.php";
 
+    public static final String GET_ADD_REQUEST_URL = BASE_URL + "Scheduling/AddRequest.php";
 
-    public static final String GET_ALL_TUTORS_URL = "http://www.erickogi.co.ke/Sumuni/Subjects/FindTutors.php";
-    public static final String GET_SUBJECTS_URL = "http://www.erickogi.co.ke/Sumuni/Subjects/Get_Levels.php";
+    public static final String GET_ADD_FAVORITES = BASE_URL + "Favorites/AddFavorites.php";
 
-    public static final String GET_ADD_REQUEST_URL = "http://www.erickogi.co.ke/Sumuni/Scheduling/AddRequest.php";
+    public static final String GET_MESSAGES = BASE_URL + "Messaging/viewMessages.php";
 
-    public static final String GET_ADD_FAVORITES = "http://www.erickogi.co.ke/Sumuni/Favorites/AddFavorites.php";
+    public static final String GET_ALL_REQUESTS_URL = BASE_URL + "Scheduling/ViewRequests.php";
 
-    public static final String GET_MESSAGES = "http://www.erickogi.co.ke/Sumuni/Messaging/viewMessages.php";
+    public static final String REPLY_REQUEST_URL = BASE_URL + "Scheduling/ReplyRequest.php";
 
-    public static final String GET_ALL_REQUESTS_URL = "http://www.erickogi.co.ke/Sumuni/Scheduling/ViewRequests.php";
-
-    public static final String REPLY_REQUEST_URL = "http://www.erickogi.co.ke/Sumuni/Scheduling/ReplyRequest.php";
+    public static final String SESSIONS = BASE_URL + "Scheduling/Sessions.php";
 
 
 

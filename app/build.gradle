@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -27,6 +31,8 @@ dependencies {
     compile('com.wdullaer:materialdatetimepicker:3.3.0') {
         exclude group: 'com.android.support'
     }
+    compile 'com.android.support:palette-v7:26.1.0'
+
     compile 'q.rorbin:badgeview:1.1.2'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
@@ -40,9 +46,16 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.google.code.gson:gson:2.8.1'
-    compile 'com.ramotion.foldingcell:folding-cell:1.2.1'
+
     testCompile 'junit:junit:4.12'
+
+    compile('com.mikepenz:materialdrawer:5.9.5@aar') {
+        transitive = true
+        exclude group: 'com.android.support'
+    }
+
 }
+
 
 
 

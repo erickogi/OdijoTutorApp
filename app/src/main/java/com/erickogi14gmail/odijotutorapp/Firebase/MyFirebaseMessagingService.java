@@ -3,7 +3,7 @@ package com.erickogi14gmail.odijotutorapp.Firebase;
 import android.content.Intent;
 import android.util.Log;
 
-import com.erickogi14gmail.odijotutorapp.MainActivity;
+import com.erickogi14gmail.odijotutorapp.Views.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

@@ -14,13 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-
                 android:id="@+id/layout_back"
+
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-
                 android:layout_alignParentTop="true"
-                android:onClick="goBack">
+
+                android:onClick="goBack"
+                android:visibility="gone">
                 <ImageView
                     android:id="@+id/icon_back"
                     android:layout_width="wrap_content"
@@ -160,6 +161,7 @@
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:layout_marginLeft="4dp"
+                              android:fontFamily="@font/ubuntu_bold"
                               android:padding="4dp"
                               android:text="First Name"
                               android:textAlignment="center"
@@ -167,7 +169,7 @@
                               android:textColor="@color/colorPrimaryP"
                               android:textSize="25sp"
                               android:textStyle="bold"
-                              android:typeface="monospace" />
+                              android:typeface="sans" />
 
                           <!--<TextView-->
                           <!--android:layout_width="match_parent"-->
@@ -196,10 +198,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_border_transaparent"
-
                             android:backgroundTint="@android:color/transparent"
+                            android:fontFamily="@font/ubuntu_bold"
                             android:text="mobile"
-                            android:textAlignment="viewStart" />
+                            android:textAlignment="viewStart"
+                            android:textStyle="bold"
+                            android:typeface="sans" />
                         <!--android:drawableStart="@drawable/ic_email_black_24dp"-->
                         <Button
                             android:id="@+id/btn_mail"
@@ -207,30 +211,37 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_border_transaparent"
                             android:backgroundTint="@android:color/transparent"
-
+                            android:fontFamily="@font/ubuntu_bold"
                             android:text=" email"
                             android:textAlignment="viewStart"
-                            android:textAllCaps="false" />
+                            android:textAllCaps="false"
+                            android:textStyle="bold"
+                            android:typeface="sans" />
                         <Button
                             android:id="@+id/btn_zone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_border_transaparent"
                             android:backgroundTint="@android:color/transparent"
-
+                            android:fontFamily="@font/ubuntu_bold"
                             android:text="zone "
                             android:textAlignment="viewStart"
-                            android:textAllCaps="false" />
+                            android:textAllCaps="false"
+                            android:textStyle="bold"
+                            android:typeface="sans" />
                         <Button
                             android:id="@+id/btn_course"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_border_transaparent"
                             android:backgroundTint="@android:color/transparent"
-
+                            android:fontFamily="@font/ubuntu_bold"
                             android:text="Subjects"
                             android:textAlignment="viewStart"
-                            android:textAllCaps="false" />
+
+                            android:textAllCaps="false"
+                            android:textStyle="bold"
+                            android:typeface="sans" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -253,8 +264,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:background="@drawable/rounded_border_accent"
+                            android:fontFamily="@font/ubuntu_bold"
                             android:text="Edit Profile"
-                            android:textColor="@android:color/white" />
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:typeface="sans" />
                     </LinearLayout>
 
 

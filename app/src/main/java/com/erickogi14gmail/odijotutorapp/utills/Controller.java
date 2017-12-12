@@ -13,6 +13,21 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
  */
 
 public class Controller  {
+    public static void mytoast(String msg, Context context, int icon) {
+        StyleableToast st = new StyleableToast(context, msg, Toast.LENGTH_SHORT);
+        st.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+
+        st.setTextColor(context.getResources().getColor(R.color.white));
+        try {
+            st.setIcon(icon);
+
+
+            st.setMaxAlpha();
+            st.show();
+        } catch (Exception m) {
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        }
+    }
     public void toast(String msg, Context context, int icon) {
         StyleableToast st = new StyleableToast(context, msg, Toast.LENGTH_SHORT);
         st.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
@@ -31,7 +46,7 @@ public class Controller  {
     }
     public FloatingActionButton fab(Activity activity, boolean show, int image) {
 
-        final FloatingActionButton fab = (FloatingActionButton) activity.findViewById(R.id.fab);
+        final FloatingActionButton fab = activity.findViewById(R.id.fab);
 
         if (show) {
             fab.setImageResource(image);

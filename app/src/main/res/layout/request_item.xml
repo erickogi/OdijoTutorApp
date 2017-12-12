@@ -32,11 +32,13 @@
                         android:id="@+id/txt_client_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:padding="2dp"
                         android:text="Eric Kogi Kimani"
                         android:textColor="@color/colorPrimaryP"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        android:typeface="sans"
                          />
 
                 </LinearLayout>
@@ -65,8 +67,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="2dp"
+                            android:fontFamily="@font/ubuntu_bold"
                             android:text="Buru Buru Estate"
-                            android:textColor="@android:color/black" />
+                            android:textColor="@android:color/black"
+                            android:typeface="sans" />
 
 
 
@@ -96,8 +100,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="2dp"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:text="Mathematics"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        android:typeface="sans" />
+
+                    <TextView
+                        android:id="@+id/session"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="6dp"
+                        android:paddingStart="4dp"
+                        android:text="Session On"
+                        android:textColor="@android:color/holo_green_dark"
+
+                        android:visibility="gone" />
 
 
                 </LinearLayout>
@@ -115,8 +133,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/ubuntu_bold"
                             android:text="12/11/2017"
                             android:textColor="@android:color/black"
+                            android:typeface="sans"
  />
 
 
@@ -125,8 +145,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:fontFamily="@font/ubuntu_bold"
                             android:text="14:30 - 16:00 "
                             android:textColor="@android:color/black"
+                            android:typeface="sans"
 
                             />
 
@@ -188,7 +210,8 @@
                     android:layout_weight="1"
                     android:background="@drawable/rounded_border_transaparent"
                     android:text="View"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:visibility="gone" />
                 <Button
                     android:id="@+id/btn_decline"
                     android:layout_width="wrap_content"
@@ -197,6 +220,17 @@
                     android:layout_weight="1"
                     android:background="@drawable/rounded_border_transaparent"
                     android:text="DECLINE"
+                    android:textColor="@android:color/black"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_border_transaparent"
+                    android:text="DETAIL"
                     android:textColor="@android:color/black"
                     android:visibility="gone" />
             </LinearLayout>

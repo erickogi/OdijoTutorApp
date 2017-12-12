@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.erickogi14gmail.odijotutorapp.Profile.Subjects;
+import com.erickogi14gmail.odijotutorapp.Data.Models.Subjects;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -34,6 +34,7 @@ public class PrefManager {
     private static final String KEY_SUBJECTS = "subjects";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_WORK_HRS = "work_hours";
+    private static final String KEY_ID = "id";
     // Shared Preferences
     SharedPreferences pref;
     // Editor for Shared preferences
@@ -49,7 +50,6 @@ public class PrefManager {
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
-
     public void setIsWaitingForSms(boolean isWaiting) {
         editor.putBoolean(KEY_IS_WAITING_FOR_SMS, isWaiting);
         editor.commit();
@@ -60,15 +60,15 @@ public class PrefManager {
     }
 
     public String getMobileNumber() {
-        return pref.getString(KEY_MOBILE_NUMBER, null);
+        return pref.getString(KEY_MOBILE, null);
     }
 
     public void setMobileNumber(String mobileNumber) {
-        editor.putString(KEY_MOBILE_NUMBER, mobileNumber);
+        editor.putString(KEY_MOBILE, mobileNumber);
         editor.commit();
     }
 
-    public void createLogin(String name, String email, String mobile, String zone, String des, String workhrs) {
+    public void createLogin(String name, String email, String mobile, String zone, String des, String workhrs, String id) {
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_MOBILE, mobile);
@@ -76,6 +76,7 @@ public class PrefManager {
         editor.putString(KEY_DESCRIPTION, des);
         editor.putString(KEY_WORK_HRS, workhrs);
         editor.putBoolean(KEY_IS_LOGGED_IN, true);
+        editor.putString(KEY_ID, id);
         editor.commit();
     }
 
@@ -96,6 +97,7 @@ public class PrefManager {
         profile.put("zone", pref.getString(KEY_ZONE, "null"));
         profile.put("description", pref.getString(KEY_DESCRIPTION, "Please add a short description of yourself"));
         profile.put("work_hours", pref.getString(KEY_WORK_HRS, "null"));
+        profile.put("id", pref.getString(KEY_ID, "0"));
         return profile;
     }
 
@@ -107,6 +109,11 @@ public class PrefManager {
     public String getImg() {
         return pref.getString(KEY_IMAGE, "null");
     }
+
+    public String getId() {
+        return pref.getString(KEY_ID, "0");
+    }
+
 
     public void storeZone(String zone) {
         editor.putString(KEY_ZONE, zone);

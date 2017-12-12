@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Views.MainActivity"
             android:label="@string/app_label"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashScreen"
+            android:name=".Views.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,16 +64,33 @@
         <activity
             android:name=".Messaging.MessagingActivity"
             android:label="Chats"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".Views.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Login.LoginActivity"
+            android:name=".Views.Login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Receipt.ReceiptActivity" />
-        <activity android:name=".Profile.EditProfile"
+        <activity android:name=".Views.Receipt.ReceiptActivity" />
+        <activity
+            android:name=".Views.MyProfile.EditProfile"
             android:label="Edit"
-            android:parentActivityName=".MainActivity"
-            ></activity>
+            android:parentActivityName=".Views.MainActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name=".Views.BaseActivity"
+            android:label="@string/title_activity_base"
+            android:parentActivityName=".Views.MainActivity"
+
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".Views.Requests.RequestDetails"
+            android:label="Request"
+            android:parentActivityName=".Views.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

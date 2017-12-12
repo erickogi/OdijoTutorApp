@@ -1,70 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/ubuntu_bold"
             android:padding="@dimen/welcome_title_padding"
-            android:textStyle="bold"
+            android:text="Welcome to Odijo"
+            android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="@dimen/welcome_title_size"
-            android:typeface="monospace"
-            android:text="Welcome to Odijo"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textStyle="bold"
+            android:typeface="sans" />
 
         <TextView
-            android:padding="@dimen/welcome_title_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="@font/ubuntu_bold"
+            android:padding="@dimen/welcome_title_padding"
+            android:text="Click on any action below to proceed"
             android:textAlignment="center"
-            android:text="@string/lorem_ipsum"
+            android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="normal"
-            android:textColor="@android:color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:typeface="sans" />
     </LinearLayout>
 
 <LinearLayout
 
-    android:layout_alignParentBottom="true"
-
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal">
     <Button
-        android:onClick="newAccountBtnPressed"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:gravity="center"
-        android:layout_gravity="center_vertical"
-        android:padding="4dp"
-        android:textColor="@android:color/white"
-        android:text="New Account"
-        android:background="@drawable/rounded_border_accent"
-        android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_border_accent"
+        android:fontFamily="@font/ubuntu_bold"
+        android:gravity="center"
+        android:onClick="newAccountBtnPressed"
+        android:padding="4dp"
+        android:text="New Account"
+        android:textColor="@android:color/white"
+        android:typeface="sans" />
 
     <Button
-        android:onClick="newloginBtnPressed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
-        android:gravity="center"
-        android:layout_gravity="center_vertical"
-        android:padding="4dp"
-        android:textColor="@android:color/white"
-        android:text="Login"
-        android:background="@drawable/rounded_border_accent"
         android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:background="@drawable/rounded_border_accent"
+        android:fontFamily="@font/ubuntu_bold"
+        android:gravity="center"
+        android:onClick="newloginBtnPressed"
+        android:padding="4dp"
+        android:text="Login"
+        android:textColor="@android:color/white"
+        android:typeface="sans" />
 
 </LinearLayout>
 </RelativeLayout>

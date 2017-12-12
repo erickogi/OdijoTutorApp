@@ -37,11 +37,12 @@
                         android:id="@+id/txt_firstname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:hint="@string/first_name_hint"
                         android:inputType="textPersonName"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:typeface="sans" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -57,9 +58,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:hint="@string/last_name_hint"
                         android:inputType="textPersonName"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:typeface="sans" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -75,11 +78,12 @@
                         android:id="@+id/txt_emailAdress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:hint="@string/email_hint"
                         android:inputType="textEmailAddress"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:typeface="sans" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -95,9 +99,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/ubuntu_bold"
                         android:hint="Mobile"
                         android:inputType="phone"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:typeface="sans" />
                 </android.support.design.widget.TextInputLayout>
 
                 <!--<android.support.design.widget.TextInputLayout-->
@@ -155,18 +161,19 @@
 
             <Button
                 android:id="@+id/btn_register"
-
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:background="@drawable/rounded_border_accent"
+                android:fontFamily="@font/ubuntu_bold"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Login"
                 android:textAlignment="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:typeface="sans" />
 
             <ImageButton
                 android:layout_width="match_parent"

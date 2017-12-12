@@ -18,4 +18,17 @@
     <string name="rate_ksh_hr">Rate(KSH)/HR</string>
     <string name="level">Level</string>
     <string name="qualifications">qualifications</string>
+
+
+    <string name="search">Search</string>
+    <string name="title_activity_base_holder">BaseActivityHolder</string>
+    <string name="call_desc">Call representatives are available between 7 am and 7 pm weekdays and 8 am - 1 pm on weekends/Public holidays</string>
+    <string name="title_activity_base_blue">BaseActivityBlue</string>
+    <string name="version_text">Version 1.0</string>
+    <string name="odijo_email">info@odijo.com</string>
+    <string name="drop_us_an_email_at">Drop us an email at :</string>
+    <string name="phone_n2">0721470890</string>
+    <string name="phone_1">0724299405</string>
+    <string name="call_us_on">Call us on</string>
+    <string name="title_activity_base">BaseActivity</string>
 </resources>
