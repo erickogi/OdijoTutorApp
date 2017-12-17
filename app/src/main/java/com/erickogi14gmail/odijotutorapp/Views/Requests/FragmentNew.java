@@ -16,8 +16,8 @@ import android.widget.LinearLayout;
 
 import com.erickogi14gmail.odijotutorapp.Adapters.RequestAdapter;
 import com.erickogi14gmail.odijotutorapp.Data.Models.RequestPojo;
+import com.erickogi14gmail.odijotutorapp.Interfaces.RequestClickListener;
 import com.erickogi14gmail.odijotutorapp.R;
-import com.erickogi14gmail.odijotutorapp.utills.RecyclerTouchListener;
 
 import java.util.ArrayList;
 
@@ -53,14 +53,23 @@ public class FragmentNew extends Fragment implements DataChangedListener {
     public void updateList(ArrayList<RequestPojo> requestPojos) {
         requestAdapter.updateList(requestPojos);
         this.requestpojos = requestPojos;
-        linearLayoutEmpty.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
+        // linearLayoutEmpty.setVisibility(View.GONE);
+        // recyclerView.setVisibility(View.VISIBLE);
+        initViews();
         // initViews();
 
     }
 
     private void initViews() {
-        requestAdapter = new RequestAdapter(getContext(), requestpojos, 0);
+        requestAdapter = new RequestAdapter(getContext(), requestpojos, 0, new RequestClickListener() {
+            @Override
+            public void onCardClicke(int position) {
+
+                Intent intent = new Intent(getActivity(), RequestDetails.class);
+                intent.putExtra("data", requestpojos.get(position));
+                startActivity(intent);
+            }
+        });
         requestAdapter.notifyDataSetChanged();
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(mStaggeredLayoutManager);
@@ -84,23 +93,23 @@ public class FragmentNew extends Fragment implements DataChangedListener {
 
         }
 
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView,
-                new RecyclerTouchListener.ClickListener() {
-                    @Override
-                    public void onClick(View view, int position) {
-
-
-                        Intent intent = new Intent(getActivity(), RequestDetails.class);
-                        intent.putExtra("data", requestpojos.get(position));
-                        startActivity(intent);
-
-                    }
-
-                    @Override
-                    public void onLongClick(View view, int position) {
-
-                    }
-                }));
+//        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView,
+//                new RecyclerTouchListener.ClickListener() {
+//                    @Override
+//                    public void onClick(View view, int position) {
+//
+//
+//                        Intent intent = new Intent(getActivity(), RequestDetails.class);
+//                        intent.putExtra("data", requestpojos.get(position));
+//                        startActivity(intent);
+//
+//                    }
+//
+//                    @Override
+//                    public void onLongClick(View view, int position) {
+//
+//                    }
+//                }));
 
 
     }

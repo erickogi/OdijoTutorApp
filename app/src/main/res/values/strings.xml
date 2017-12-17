@@ -21,7 +21,7 @@
 
 
     <string name="search">Search</string>
-    <string name="title_activity_base_holder">BaseActivityHolder</string>
+    <string name="title_activity_base_holder"></string>
     <string name="call_desc">Call representatives are available between 7 am and 7 pm weekdays and 8 am - 1 pm on weekends/Public holidays</string>
     <string name="title_activity_base_blue">BaseActivityBlue</string>
     <string name="version_text">Version 1.0</string>
@@ -30,5 +30,6 @@
     <string name="phone_n2">0721470890</string>
     <string name="phone_1">0724299405</string>
     <string name="call_us_on">Call us on</string>
-    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_activity_base"></string>
+    <string name="title_activity_edit_my_profile">Edit Profile</string>
 </resources>

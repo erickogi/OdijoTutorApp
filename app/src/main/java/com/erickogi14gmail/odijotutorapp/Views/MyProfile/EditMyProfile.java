@@ -9,11 +9,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -54,7 +57,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditProfile extends AppCompatActivity {
+public class EditMyProfile extends AppCompatActivity {
     private static ArrayList<Subjects> s1 = new ArrayList<>();
     private final int CAMERA_REQUEST = 1888;
     PrefManager prefManager;
@@ -80,20 +83,23 @@ public class EditProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_edit_my_profile);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ActionBar bar = getActionBar();
-//        bar.setBackgroundDrawable(new ColorDrawable(this.getResources().getColor(R.color.colorPrimaryDark)));
-//        setContentView(R.layout.activity_edit_profile);
-        prefManager = new PrefManager(EditProfile.this);
-//        bar.setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        fab.hide();
         txtName = findViewById(R.id.txt_name);
+        prefManager = new PrefManager(EditMyProfile.this);
         txtEmail = findViewById(R.id.txt_emailAdress);
         mSpinnerZone = findViewById(R.id.spinnerZone);
         btnAddSubjects = findViewById(R.id.btn_add_subject);
@@ -137,7 +143,7 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-        intent=getIntent();
+        intent = getIntent();
 
 
         txtName.setText(intent.getStringExtra("Name"));
@@ -146,10 +152,10 @@ public class EditProfile extends AppCompatActivity {
         edtDescription.setText(intent.getStringExtra("description"));
 
         subjectses = (ArrayList<Subjects>) intent.getSerializableExtra("data");
-        String[] Zones =intent.getStringArrayExtra("Zones");
-        int zone = intent.getIntExtra("zone",1);
+        String[] Zones = intent.getStringArrayExtra("Zones");
+        int zone = intent.getIntExtra("zone", 1);
 
-        ArrayAdapter<String> simpleAdapterCourse = new ArrayAdapter<String>(EditProfile.this, android.R.layout.simple_spinner_dropdown_item, Zones);
+        ArrayAdapter<String> simpleAdapterCourse = new ArrayAdapter<String>(EditMyProfile.this, android.R.layout.simple_spinner_dropdown_item, Zones);
         mSpinnerZone.setAdapter(simpleAdapterCourse);
         mSpinnerZone.setSelection(zone);
 
@@ -168,9 +174,10 @@ public class EditProfile extends AppCompatActivity {
 
         initViews();
     }
+
     private void UpdateDetails() {
-        if(bitmap!=null&&!txtName.getText().toString().equals("")&&!txtEmail.getText().toString().equals("")
-                &&!edtDescription.getText().toString().equals("")&&!edtDescription.getText().toString().equals("")) {
+        if (bitmap != null && !txtName.getText().toString().equals("") && !txtEmail.getText().toString().equals("")
+                && !edtDescription.getText().toString().equals("") && !edtDescription.getText().toString().equals("")) {
             String image = getStringImage(bitmap);
 
             String mobile = intent.getStringExtra("mobile");
@@ -190,11 +197,9 @@ public class EditProfile extends AppCompatActivity {
             //  prefManager.updateUser(name,email,img,zone);
             //fragmentManager.popBackStack();
             //popOutFragments();
-        }else {
+        } else {
             Toast.makeText(this, "Some Fields Are Missing", Toast.LENGTH_SHORT).show();
         }
-
-
 
 
     }
@@ -202,7 +207,7 @@ public class EditProfile extends AppCompatActivity {
     private void initViews() {
         subjectses = prefManager.getSubjects();
         recyclerView = findViewById(R.id.recycler_view);
-        subjectAdapter = new SubjectAdapter(EditProfile.this, 0, subjectses, new clickListenerSubject() {
+        subjectAdapter = new SubjectAdapter(EditMyProfile.this, 0, subjectses, new clickListenerSubject() {
             @Override
             public void onBtnDeleteClicked(int pos) {
                 subjectses.remove(pos);
@@ -226,11 +231,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     private void getSubjects(final String mobile) {
-        final ProgressDialog loading = ProgressDialog.show(EditProfile.this, "Fetching Subjects...", "Please wait...", false, false);
-
-
-
-
+        final ProgressDialog loading = ProgressDialog.show(EditMyProfile.this, "Fetching Subjects...", "Please wait...", false, false);
 
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -242,7 +243,7 @@ public class EditProfile extends AppCompatActivity {
                 //progressDialog.dismiss();
                 // dialoge.show();
                 try {
-                    Log.d("erfh","errrrr"+response);
+                    Log.d("erfh", "errrrr" + response);
 
                     JSONObject responseObj = new JSONObject(response);
 
@@ -254,7 +255,7 @@ public class EditProfile extends AppCompatActivity {
                     // checking for error, if not error SMS is initiated
                     // device should receive it shortly
                     if (!error) {
-                        Log.d("erf","errrrr");
+                        Log.d("erf", "errrrr");
                         loading.dismiss();
 
 //                        String a = null;
@@ -279,8 +280,7 @@ public class EditProfile extends AppCompatActivity {
                         //subjectses1 = gson.fromJson(a, collectionType);
 
                         subjectses1 = SubjectParser.parseData(response);
-                        Log.d("response",response);
-
+                        Log.d("response", response);
 
 
                         popup(subjectses1);
@@ -291,7 +291,7 @@ public class EditProfile extends AppCompatActivity {
                         String message = responseObj.getString("message");
                         //relativeLayoutSignup.setVisibility(View.VISIBLE);
                         //relativeLayoutOtp.setVisibility(View.GONE);
-                        Toast.makeText(EditProfile.this,
+                        Toast.makeText(EditMyProfile.this,
                                 "Error: " + message,
                                 Toast.LENGTH_LONG).show();
                         // dialoge.dismiss();
@@ -306,7 +306,7 @@ public class EditProfile extends AppCompatActivity {
                     loading.dismiss();
                     e.printStackTrace();
                     Log.d("ERRRRR", e.toString());
-                    Toast.makeText(EditProfile.this,
+                    Toast.makeText(EditMyProfile.this,
                             "Error: " + e.getMessage(),
                             Toast.LENGTH_LONG).show();
                     // dialoge.dismiss();
@@ -324,7 +324,7 @@ public class EditProfile extends AppCompatActivity {
                 //relativeLayoutSignup.setVisibility(View.VISIBLE);
                 //relativeLayoutOtp.setVisibility(View.GONE);
                 Log.e("error", "Error: " + error.getMessage());
-                Toast.makeText(EditProfile.this,
+                Toast.makeText(EditMyProfile.this,
                         error.getMessage(), Toast.LENGTH_SHORT).show();
                 //progressDialog.dismiss();
                 // dialoge.dismiss();
@@ -357,7 +357,7 @@ public class EditProfile extends AppCompatActivity {
 
     private void update(final String name, final String email, final String mobile, final String zone,
                         final String image, final String subjects, final String description, final String work_hours) {
-        final ProgressDialog loading = ProgressDialog.show(EditProfile.this, "Uploading...", "Please wait...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(EditMyProfile.this, "Uploading...", "Please wait...", false, false);
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 Configs.UPDATE_PROFILE_URL, new Response.Listener<String>() {
@@ -381,8 +381,8 @@ public class EditProfile extends AppCompatActivity {
 
                         loading.dismiss();
                         prefManager.updateUser(name, email, imagePath, zone, description, work_hours);
-                        Toast.makeText(EditProfile.this, "Profile Updated Successfully", Toast.LENGTH_LONG).show();
-                      //  popOutFragments();
+                        Toast.makeText(EditMyProfile.this, "Profile Updated Successfully", Toast.LENGTH_LONG).show();
+                        //  popOutFragments();
 
                         // boolean flag saying device is waiting for sms
 
@@ -399,7 +399,7 @@ public class EditProfile extends AppCompatActivity {
                         String message = responseObj.getString("message");
                         //relativeLayoutSignup.setVisibility(View.VISIBLE);
                         //relativeLayoutOtp.setVisibility(View.GONE);
-                        Toast.makeText(EditProfile.this,
+                        Toast.makeText(EditMyProfile.this,
                                 "Error: " + message,
                                 Toast.LENGTH_LONG).show();
                         // dialoge.dismiss();
@@ -414,7 +414,7 @@ public class EditProfile extends AppCompatActivity {
                     loading.dismiss();
                     e.printStackTrace();
                     Log.d("ERRRRR", e.toString());
-                    Toast.makeText(EditProfile.this,
+                    Toast.makeText(EditMyProfile.this,
                             "Error: " + e.getMessage(),
                             Toast.LENGTH_LONG).show();
                     // dialoge.dismiss();
@@ -432,7 +432,7 @@ public class EditProfile extends AppCompatActivity {
                 //relativeLayoutSignup.setVisibility(View.VISIBLE);
                 //relativeLayoutOtp.setVisibility(View.GONE);
                 Log.e("error", "Error: " + error.getMessage());
-                Toast.makeText(EditProfile.this,
+                Toast.makeText(EditMyProfile.this,
                         error.getMessage(), Toast.LENGTH_SHORT).show();
                 //progressDialog.dismiss();
                 // dialoge.dismiss();
@@ -481,7 +481,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     void popup(final ArrayList<Subjects> subjGects) {
-        final View popupview = LayoutInflater.from(EditProfile.this).inflate(R.layout.subjects_pop_up_view, null);
+        final View popupview = LayoutInflater.from(EditMyProfile.this).inflate(R.layout.subjects_pop_up_view, null);
 
         final PopupWindow popupWindow = new PopupWindow(popupview, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT / 2);
         subjectsUnadded.clear();
@@ -509,9 +509,7 @@ public class EditProfile extends AppCompatActivity {
         linearLayoutEmpty = popupview.findViewById(R.id.empty_layout);
 
         arrayList = new ArrayList<>();
-        subjectAdapter = new SubjectAdapter(EditProfile.this, 1, subjectsUnadded, new clickListenerSubject() {
-
-
+        subjectAdapter = new SubjectAdapter(EditMyProfile.this, 1, subjectsUnadded, new clickListenerSubject() {
 
 
             @Override
@@ -521,17 +519,17 @@ public class EditProfile extends AppCompatActivity {
 
             @Override
             public void onBtnAddClicked(final int adapterPosition) {
-               // String[] level = {"All", "8:4:4", "Diploma", "Degree", "Higher Diploma", "Certificate", "KSCE", "KCPE", "IGCSE"};
-                ArrayList<Levels> levelses=subjectsUnadded.get(adapterPosition).getLevelses();
+                // String[] level = {"All", "8:4:4", "Diploma", "Degree", "Higher Diploma", "Certificate", "KSCE", "KCPE", "IGCSE"};
+                ArrayList<Levels> levelses = subjectsUnadded.get(adapterPosition).getLevelses();
 
 
                 String[] level = new String[levelses.size()];
-                for(int a=0;a<levelses.size();a++){
-                    level[a]=levelses.get(a).getLevel();
+                for (int a = 0; a < levelses.size(); a++) {
+                    level[a] = levelses.get(a).getLevel();
                 }
 
 
-                final Dialog dialog = new Dialog(EditProfile.this);
+                final Dialog dialog = new Dialog(EditMyProfile.this);
                 dialog.setContentView(R.layout.dialog_subject_details);
                 dialog.setTitle("Edit");
                 dialog.setCanceledOnTouchOutside(false);
@@ -539,7 +537,7 @@ public class EditProfile extends AppCompatActivity {
                 final TextInputEditText edtQualifications = dialog.findViewById(R.id.edt_qualifications);
                 final Spinner spinnerLevel = dialog.findViewById(R.id.spinner_level);
 
-                final ArrayAdapter<String> simpleAdapterCourse = new ArrayAdapter<String>(EditProfile.this, android.R.layout.simple_spinner_dropdown_item, level);
+                final ArrayAdapter<String> simpleAdapterCourse = new ArrayAdapter<String>(EditMyProfile.this, android.R.layout.simple_spinner_dropdown_item, level);
                 spinnerLevel.setAdapter(simpleAdapterCourse);
                 //spinnerLevel.setSelection(zone);
 
@@ -659,7 +657,7 @@ public class EditProfile extends AppCompatActivity {
     }
 
     public Bitmap getThumbnail(String filename) {
-        Bitmap thumnail = BitmapFactory.decodeResource(EditProfile.this.getResources(), R.drawable.ic_person_black_24dp);
+        Bitmap thumnail = BitmapFactory.decodeResource(EditMyProfile.this.getResources(), R.drawable.ic_person_black_24dp);
         try {
             File filepath = getApplicationContext().getFileStreamPath(filename);
             FileInputStream fi = new FileInputStream(filepath);
@@ -684,16 +682,16 @@ public class EditProfile extends AppCompatActivity {
             return true;
         } catch (Exception m) {
             //controller.toast("Error Storing Image",ItemDetails.this,R.drawable.ic_error_outline_black_24dp);
-            Toast.makeText(EditProfile.this, "not sac" + m.getMessage(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(EditMyProfile.this, "not sac" + m.getMessage(), Toast.LENGTH_SHORT).show();
             m.printStackTrace();
             return false;
         }
     }
 
     void popOutFragments() {
-       // FragmentManager fragmentManager = getApplicationContext().getSupportFragmentManager();
+        // FragmentManager fragmentManager = getApplicationContext().getSupportFragmentManager();
         //for (int i = 0; i < 1; i++) {
-       // fragmentManager.popBackStack();
+        // fragmentManager.popBackStack();
         // }
     }
 

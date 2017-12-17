@@ -105,7 +105,7 @@ public class FragmentMyProfile extends Fragment {
                 // popOutFragments();
                // setUpView();
 
-                Intent intent=new Intent(getActivity(),EditProfile.class);
+                Intent intent = new Intent(getActivity(), EditMyProfile.class);
                 intent.putExtra("Name", hashMap.get("name"));
                 intent.putExtra("Email", hashMap.get("email"));
                 intent.putExtra("Zones", zones);

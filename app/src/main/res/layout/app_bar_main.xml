@@ -30,7 +30,7 @@
             android:background="@color/white"
             android:textAlignment="viewEnd"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:logo="@drawable/ic_school_icon100dp"
+
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:subtitleTextColor="@color/colorAccent"
             app:title="@string/app_name"

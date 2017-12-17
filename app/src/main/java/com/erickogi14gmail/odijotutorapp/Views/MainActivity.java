@@ -17,14 +17,13 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.VolleyError;
 import com.erickogi14gmail.odijotutorapp.Configs;
 import com.erickogi14gmail.odijotutorapp.Data.Models.RequestPojo;
+import com.erickogi14gmail.odijotutorapp.Data.Network.DumbVolleyRequest;
+import com.erickogi14gmail.odijotutorapp.Data.Network.RequestListener;
 import com.erickogi14gmail.odijotutorapp.Helper.PrefManager;
 import com.erickogi14gmail.odijotutorapp.Interfaces.DrawerItemListener;
-import com.erickogi14gmail.odijotutorapp.MyApplication;
 import com.erickogi14gmail.odijotutorapp.R;
 import com.erickogi14gmail.odijotutorapp.Views.Requests.FragmentActive;
 import com.erickogi14gmail.odijotutorapp.Views.Requests.FragmentHistory;
@@ -58,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
     ArrayList<RequestPojo> newRequest;
     ArrayList<RequestPojo> activeRequest;
     ArrayList<RequestPojo> historyRequest;
+    private ViewPager viewPager;
     private QBadgeView qBadgeView;
     private AppBarLayout mAppBarLayout;
     private TextView textViewUpcoming;
@@ -65,9 +65,11 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
     private TextView name, email;
     private ImageView img;
     private TabLayout tabLayout;
-    private ViewPager viewPager;
+
     private SwipeRefreshLayout swipe_refresh_layout;
     private ArrayList<RequestPojo> requestpojos;
+    private DumbVolleyRequest dumbVolleyRequest;
+
 
     private void setupWindowAnimationss() {
         Slide slide = null;
@@ -86,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dumbVolleyRequest = new DumbVolleyRequest();
         setupWindowAnimationss();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -138,19 +142,6 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
         }
 
 
-//        if(!prefManager.isProfileSet()) {
-//            //fragment = new FragmentRequests();
-//            // FragmentManager fragmentManager = getSupportFragmentManager();
-//            // fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment, "fragmentRequests").commit();
-//        }else {
-//            Intent intent=new Intent(MainActivity.this,BaseActivity.class);
-//
-//            intent.putExtra("id",3);
-//            startActivity(intent);
-//            // fragment = new FragmentMyProfile();
-//            // FragmentManager fragmentManager = getSupportFragmentManager();
-//            // fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment, "fragmentProfile").commit();
-//        }
 
         HashMap<String, String> hashMap = prefManager.getUserDetails();
         String image = prefManager.getImg();
@@ -294,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
 
         tabLayout.getTabAt(0).setText("New");
         tabLayout.getTabAt(1).setText("Active");
-        tabLayout.getTabAt(2).setText("Hstory");
+        tabLayout.getTabAt(2).setText("History");
 
 
     }
@@ -320,15 +311,25 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
         HashMap<String, String> de = prefManager.getUserDetails();
         final String moblie = de.get("mobile");
         //  final ProgressDialog loading = ProgressDialog.show(getContext(),"Loading...","Please wait...",false,false);
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("mobile", moblie);
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                Configs.GET_ALL_REQUESTS_URL, new Response.Listener<String>() {
+
+        dumbVolleyRequest.getPostData(Configs.GET_ALL_REQUESTS_URL, params, new RequestListener() {
+            @Override
+            public void onError(VolleyError error) {
+                swipe_refresh_layout.setRefreshing(false);
+                filter();
+                Log.e("error", "Error: " + error.getMessage());
+            }
 
             @Override
-            public void onResponse(String response) {
-                // Log.d("response", response.toString());
-                //progressDialog.dismiss();
-                // dialoge.show();
+            public void onError(String error) {
+
+            }
+
+            @Override
+            public void onSuccess(String response) {
                 try {
                     JSONObject responseObj = new JSONObject(response);
 
@@ -361,7 +362,8 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
                     } else {
                         // loading.dismiss();
                         swipe_refresh_layout.setRefreshing(false);
-                        String message = responseObj.getString("message");
+                        filter();
+                        // String message = responseObj.getString("message");
 
 
                     }
@@ -370,41 +372,95 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
                 } catch (JSONException e) {
                     swipe_refresh_layout.setRefreshing(false);
 
+                    filter();
                     e.printStackTrace();
                     Log.d("ERRRRR", e.toString());
 
                 }
-
             }
-        }, error -> {
-            // loading.dismiss();
-            //relativeLayoutSignup.setVisibility(View.VISIBLE);
-            //relativeLayoutOtp.setVisibility(View.GONE);
-            swipe_refresh_layout.setRefreshing(false);
-            Log.e("error", "Error: " + error.getMessage());
-
-        }) {
-
-            /**
-             * Passing user parameters to our server
-             *
-             * @return
-             */
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("mobile", moblie);
-
-
-                Log.e("posting params", "Posting params: " + params.toString());
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        MyApplication.getInstance().addToRequestQueue(strReq);
+        });
+//        StringRequest strReq = new StringRequest(Request.Method.POST,
+//                Configs.GET_ALL_REQUESTS_URL, new Response.Listener<String>() {
+//
+//            @Override
+//            public void onResponse(String response) {
+//
+//                try {
+//                    JSONObject responseObj = new JSONObject(response);
+//
+//                    // Parsing json object response
+//                    // response will be a json object
+//                    boolean error = responseObj.getBoolean("error");
+//                    //  String message = responseObj.getString("message");
+//
+//                    // checking for error, if not error SMS is initiated
+//                    // device should receive it shortly
+//                    if (!error) {
+//
+//                        // loading.dismiss();
+//                        ArrayList<RequestPojo> requestPojo = new ArrayList<>();
+//                        String gsong = responseObj.getString("requests");
+//
+//
+//                        Gson gson = new Gson();
+//                        Type collectionType = new TypeToken<Collection<RequestPojo>>() {
+//
+//                        }.getType();
+//                        requestPojo = gson.fromJson(gsong, collectionType);
+//                        requestpojos = requestPojo;
+//
+//                        Log.d("dataloades", "" + requestPojo.toString());
+//                        swipe_refresh_layout.setRefreshing(false);
+//                        filter();
+//
+//
+//                    } else {
+//                        // loading.dismiss();
+//                        swipe_refresh_layout.setRefreshing(false);
+//                        String message = responseObj.getString("message");
+//
+//
+//                    }
+//
+//
+//                } catch (JSONException e) {
+//                    swipe_refresh_layout.setRefreshing(false);
+//
+//                    e.printStackTrace();
+//                    Log.d("ERRRRR", e.toString());
+//
+//                }
+//
+//            }
+//        }, error -> {
+//            // loading.dismiss();
+//            //relativeLayoutSignup.setVisibility(View.VISIBLE);
+//            //relativeLayoutOtp.setVisibility(View.GONE);
+//            swipe_refresh_layout.setRefreshing(false);
+//            Log.e("error", "Error: " + error.getMessage());
+//
+//        }) {
+//
+//            /**
+//             * Passing user parameters to our server
+//             *
+//             * @return
+//             */
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("mobile", moblie);
+//
+//
+//                Log.e("posting params", "Posting params: " + params.toString());
+//
+//                return params;
+//            }
+//
+//        };
+//
+//        // Adding request to request queue
+//        MyApplication.getInstance().addToRequestQueue(strReq);
 
         return requestpojos;
     }
@@ -460,15 +516,6 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
     }
 
 
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
 
 
 }

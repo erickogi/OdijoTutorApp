@@ -2,12 +2,14 @@ package com.erickogi14gmail.odijotutorapp.Views.Login;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,16 +20,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.erickogi14gmail.odijotutorapp.Configs;
+import com.erickogi14gmail.odijotutorapp.Data.Network.DumbVolleyRequest;
+import com.erickogi14gmail.odijotutorapp.Data.Network.RequestListener;
 import com.erickogi14gmail.odijotutorapp.Firebase.SharedPrefManager;
 import com.erickogi14gmail.odijotutorapp.Helper.PrefManager;
-import com.erickogi14gmail.odijotutorapp.MyApplication;
 import com.erickogi14gmail.odijotutorapp.R;
 import com.erickogi14gmail.odijotutorapp.service.HttpService;
 
@@ -58,6 +57,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
     private Dialog dialoge;
     private ImageView imagback;
+    private DumbVolleyRequest dumbVolleyRequest;
 
     private static boolean isValidPhoneNumber(String mobile) {
         String regEx = "^[0-9]{10}$";
@@ -77,6 +77,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.sign_up_fragment,container,false);
         pref = new PrefManager(getContext());
+        dumbVolleyRequest = new DumbVolleyRequest();
         mFirstName = view.findViewById(R.id.txt_firstname);
         mLastName = view.findViewById(R.id.txt_lastname);
         mEmail = view.findViewById(R.id.txt_emailAdress);
@@ -187,6 +188,33 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    private void alertDialog(final String message) {
+        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        dialog.dismiss();
+                        relativeLayoutOtp.setVisibility(View.GONE);
+                        relativeLayoutSignup.setVisibility(View.VISIBLE);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        dialog.dismiss();
+
+                        break;
+                }
+            }
+        };
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setMessage(message).setPositiveButton("Okay", dialogClickListener)
+                // .setNegativeButton("No", dialogClickListener)
+                .show();
+
+    }
+
 
     /**
      * Method initiates the SMS request on the server
@@ -196,99 +224,151 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
      * @param mobile user valid mobile number
      */
     private void requestForSMS(final String name, final String email, final String mobile, final String token) {
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                Configs.REGISTER_URL, new Response.Listener<String>() {
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("name", name);
+        params.put("email", email);
+        params.put("mobile", mobile);
+        params.put("token", token);
+        relativeLayoutOtp.setVisibility(View.VISIBLE);
+        relativeLayoutSignup.setVisibility(View.GONE);
+
+
+        dumbVolleyRequest.getPostData(Configs.REGISTER_URL, params, new RequestListener() {
+            @Override
+            public void onError(VolleyError error) {
+                alertDialog("Error registering you please try again");
+            }
 
             @Override
-            public void onResponse(String response) {
-                // Log.d("response", response.toString());
-                progressDialog.dismiss();
-                // dialoge.show();
+            public void onError(String error) {
+
+            }
+
+            @Override
+            public void onSuccess(String response) {
                 try {
                     JSONObject responseObj = new JSONObject(response);
-
-                    // Parsing json object response
-                    // response will be a json object
                     boolean error = responseObj.getBoolean("error");
-                    //  String message = responseObj.getString("message");
-
-                    // checking for error, if not error SMS is initiated
-                    // device should receive it shortly
                     if (!error) {
-                        // boolean flag saying device is waiting for sms
-
                         pref.setIsWaitingForSms(true);
-                        // progressDialog.dismiss();
-                        // moving the screen to next pager item i.e otp screen
-                        //dialoge.show();
-
-
-                        //Toast.makeText(getActivity(), "sent", Toast.LENGTH_SHORT).show();
+                        //progressDialog.dismiss();
 
                     } else {
+
                         String message = responseObj.getString("message");
-                        //relativeLayoutSignup.setVisibility(View.VISIBLE);
-                        //relativeLayoutOtp.setVisibility(View.GONE);
-                        //    Toast.makeText(getContext(),
-                        //          "Error: " + message,
-                        //          Toast.LENGTH_LONG).show();
-                        // dialoge.dismiss();
+                        //String message = responseObj.getString("message");
+                        progressDialog.dismiss();
+                        alertDialog(message);
 
                     }
 
                     // hiding the progress bar
-                    progressDialog.dismiss();
 
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d("ERRRRR", e.toString());
-                    Toast.makeText(getContext(),
-                            "Error: " + e.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                    // dialoge.dismiss();
-                    //relativeLayoutSignup.setVisibility(View.VISIBLE);
-                    // relativeLayoutOtp.setVisibility(View.GONE);
+                    alertDialog("Error registering you please try again");
+
                     progressDialog.dismiss();
                 }
-
             }
-        }, new Response.ErrorListener() {
+        });
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //relativeLayoutSignup.setVisibility(View.VISIBLE);
-                //relativeLayoutOtp.setVisibility(View.GONE);
-                Log.e("error", "Error: " + error.getMessage());
-                Toast.makeText(getContext(),
-                        error.getMessage(), Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-                // dialoge.dismiss();
-                //progressBar.setVisibility(View.GONE);
-            }
-        }) {
 
-            /**
-             * Passing user parameters to our server
-             * @return
-             */
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("name", name);
-                params.put("email", email);
-                params.put("mobile", mobile);
-                params.put("token", token);
-
-                Log.e("posting params", "Posting params: " + params.toString());
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        MyApplication.getInstance().addToRequestQueue(strReq);
+//        StringRequest strReq = new StringRequest(Request.Method.POST,
+//                Configs.REGISTER_URL, new Response.Listener<String>() {
+//
+//            @Override
+//            public void onResponse(String response) {
+//                // Log.d("response", response.toString());
+//                progressDialog.dismiss();
+//                // dialoge.show();
+//                try {
+//                    JSONObject responseObj = new JSONObject(response);
+//
+//                    // Parsing json object response
+//                    // response will be a json object
+//                    boolean error = responseObj.getBoolean("error");
+//                    //  String message = responseObj.getString("message");
+//
+//                    // checking for error, if not error SMS is initiated
+//                    // device should receive it shortly
+//                    if (!error) {
+//                        // boolean flag saying device is waiting for sms
+//
+//                        pref.setIsWaitingForSms(true);
+//                        // progressDialog.dismiss();
+//                        // moving the screen to next pager item i.e otp screen
+//                        //dialoge.show();
+//
+//
+//                        //Toast.makeText(getActivity(), "sent", Toast.LENGTH_SHORT).show();
+//
+//                    } else {
+//                        String message = responseObj.getString("message");
+//                        //relativeLayoutSignup.setVisibility(View.VISIBLE);
+//                        //relativeLayoutOtp.setVisibility(View.GONE);
+//                        //    Toast.makeText(getContext(),
+//                        //          "Error: " + message,
+//                        //          Toast.LENGTH_LONG).show();
+//                        // dialoge.dismiss();
+//
+//                    }
+//
+//                    // hiding the progress bar
+//                    progressDialog.dismiss();
+//
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Log.d("ERRRRR", e.toString());
+//                    Toast.makeText(getContext(),
+//                            "Error: " + e.getMessage(),
+//                            Toast.LENGTH_LONG).show();
+//                    // dialoge.dismiss();
+//                    //relativeLayoutSignup.setVisibility(View.VISIBLE);
+//                    // relativeLayoutOtp.setVisibility(View.GONE);
+//                    progressDialog.dismiss();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                //relativeLayoutSignup.setVisibility(View.VISIBLE);
+//                //relativeLayoutOtp.setVisibility(View.GONE);
+//                Log.e("error", "Error: " + error.getMessage());
+//                Toast.makeText(getContext(),
+//                        error.getMessage(), Toast.LENGTH_SHORT).show();
+//                progressDialog.dismiss();
+//                // dialoge.dismiss();
+//                //progressBar.setVisibility(View.GONE);
+//            }
+//        }) {
+//
+//            /**
+//             * Passing user parameters to our server
+//             * @return
+//             */
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("name", name);
+//                params.put("email", email);
+//                params.put("mobile", mobile);
+//                params.put("token", token);
+//
+//                Log.e("posting params", "Posting params: " + params.toString());
+//
+//                return params;
+//            }
+//
+//        };
+//
+//        // Adding request to request queue
+//        MyApplication.getInstance().addToRequestQueue(strReq);
     }
 
     public void setText(String code) {

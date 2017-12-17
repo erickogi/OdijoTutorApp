@@ -100,12 +100,13 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_linkedin"
-
                 android:gravity="center"
-                android:scaleType="centerCrop"
 
+                android:scaleType="centerCrop"
                 android:src="@drawable/sign_in_large_default"
-                android:textColor="@android:color/white" />
+
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 
