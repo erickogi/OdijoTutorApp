@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         registerReceiver(closeReceiver, new IntentFilter("com.odijo.close"));
 
 
-        fragment = new WelcomFragment();
+        fragment = new LoginFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.frame_layout, fragment, "fragmentWelcome").commit();
         //}

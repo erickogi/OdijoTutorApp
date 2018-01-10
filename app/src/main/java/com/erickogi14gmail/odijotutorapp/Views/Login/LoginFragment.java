@@ -60,6 +60,8 @@ public class LoginFragment extends Fragment {
     private PrefManager pref;
     private Dialog dialoge;
     private TextInputEditText mEmail;
+    private TextInputEditText mPassword;
+
     private Button btnLogin;
 
     private DumbVolleyRequest dumbVolleyRequest;
@@ -85,6 +87,7 @@ public class LoginFragment extends Fragment {
         dumbVolleyRequest = new DumbVolleyRequest();
         controller = new Controller();
         mEmail = view.findViewById(R.id.edt_email);
+        mPassword = view.findViewById(R.id.edt_password);
         btnLogin = view.findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +99,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void initiate() {
-        if (isFilled(mEmail)) {
+        if (isFilled(mEmail) && isFilled(mPassword)) {
             //if(validateFields())
             //{
             progressDialog = new ProgressDialog(getContext());
@@ -105,7 +108,7 @@ public class LoginFragment extends Fragment {
             progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(false);
             progressDialog.show();
-            requestLoginTutor(mEmail.getText().toString());
+            requestLoginTutor(mEmail.getText().toString(), mPassword.getText().toString());
             //}
         }
     }
@@ -155,11 +158,12 @@ public class LoginFragment extends Fragment {
 
     }
 
-    private void requestLoginTutor(final String mobile) {
+    private void requestLoginTutor(final String mobile, final String pass) {
         Map<String, String> params = new HashMap<String, String>();
 
         params.put("mobile", mobile);
         params.put("user", "TUTOR");
+        params.put("password", pass);
 
 
         dumbVolleyRequest.getPostData(Configs.LOGIN_URL, params, new RequestListener() {

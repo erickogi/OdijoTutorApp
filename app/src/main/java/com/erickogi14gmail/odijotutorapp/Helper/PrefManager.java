@@ -152,6 +152,7 @@ public class PrefManager {
     public ArrayList<Subjects> getSubjects() {
         ArrayList<Subjects> subjectses = new ArrayList<>();
         String gsong = pref.getString(KEY_SUBJECTS, "");
+        Log.d("gsonSa", gsong);
         Gson gson = new Gson();
         Type collectionType = new TypeToken<Collection<Subjects>>() {
 

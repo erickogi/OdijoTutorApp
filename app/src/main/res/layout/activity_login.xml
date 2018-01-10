@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDarkP"
+    android:background="@color/white"
     tools:context=".Views.Login.LoginActivity">
     <de.hdodenhof.circleimageview.CircleImageView
+
         android:id="@+id/img_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_centerHorizontal="true"
+
         android:fitsSystemWindows="true"
         android:padding="@dimen/login_screen_logo_padding"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_school_black_24dp"
+        android:visibility="gone"
         app:civ_border_color="@color/colorAccentP"
         app:civ_border_width="0dp"
         />

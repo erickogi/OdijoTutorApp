@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
     ArrayList<RequestPojo> newRequest;
     ArrayList<RequestPojo> activeRequest;
     ArrayList<RequestPojo> historyRequest;
-    private ViewPager viewPager;
+
     private QBadgeView qBadgeView;
     private AppBarLayout mAppBarLayout;
     private TextView textViewUpcoming;
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements FragmentActive.Da
     private TextView name, email;
     private ImageView img;
     private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     private SwipeRefreshLayout swipe_refresh_layout;
     private ArrayList<RequestPojo> requestpojos;

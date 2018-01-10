@@ -32,4 +32,7 @@
     <string name="call_us_on">Call us on</string>
     <string name="title_activity_base"></string>
     <string name="title_activity_edit_my_profile">Edit Profile</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+
 </resources>

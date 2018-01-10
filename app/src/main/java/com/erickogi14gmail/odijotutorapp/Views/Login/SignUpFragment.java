@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -43,14 +44,14 @@ import java.util.Map;
 
 public class SignUpFragment extends Fragment implements View.OnClickListener {
     public static Fragment fragment = null;
+    LinearLayout relativeLayoutSignup;
     private View view;
-    private TextInputEditText mFirstName, mLastName, mEmail, mMobile;
+    private TextInputEditText mFirstName, mLastName, mEmail, mMobile, mPassword, mConfirmPassword;
     private Button btnRegister;
     private ProgressBar progressBar;
     private ProgressDialog progressDialog;
     private PrefManager pref;
-    private RelativeLayout relativeLayoutOtp, relativeLayoutSignup;
-
+    private RelativeLayout relativeLayoutOtp;
     private EditText edtCode;
     private Button btnSignup, btnVerify, btnResend;
 
@@ -117,6 +118,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         });
 
 
+        mPassword = view.findViewById(R.id.txt_password);
+        mConfirmPassword = view.findViewById(R.id.txt_confirm_password);
+
+
 
 
 
@@ -134,7 +139,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.btn_register || v.getId() == R.id.btn_resend) {
 
-            if (isFilled(mFirstName) && isFilled(mLastName) && isFilled(mEmail) && isFilled(mMobile)) {
+            if (isFilled(mFirstName) && isFilled(mLastName) && isFilled(mEmail)
+                    && isFilled(mMobile) && isFilled(mConfirmPassword) && isFilled(mPassword)) {
 
                 if (validateFields()) {
 
@@ -147,13 +153,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                     String name = mFirstName.getText().toString() + "  " + mLastName.getText().toString();
                     String email = mEmail.getText().toString();
                     String mobile = mMobile.getText().toString();
+                    String pass = mPassword.getText().toString();
 
                     relativeLayoutOtp.setVisibility(View.VISIBLE);
                     relativeLayoutSignup.setVisibility(View.GONE);
                     String token = SharedPrefManager.getInstance(getContext()).getDeviceToken();
 
                     requestForSMS(name
-                            , email, mobile, token);
+                            , email, mobile, token, pass);
 
                 }
             } else {
@@ -171,11 +178,18 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         } else if (!isValidPhoneNumber(mMobile.getText().toString())) {
             mMobile.setError("Invalid Number");
             return false;
+        } else if (!isNotEqual(mConfirmPassword.getText().toString(), mPassword.getText().toString())) {
+            mConfirmPassword.setError("Password doesn't match");
+            return false;
         } else {
             return true;
         }
 
 
+    }
+
+    private boolean isNotEqual(String s, String s1) {
+        return s.equals(s1);
     }
 
     private boolean isFilled(TextInputEditText textInputEditText) {
@@ -218,18 +232,19 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
     /**
      * Method initiates the SMS request on the server
-     *
-     * @param name   user name
+     *  @param name   user name
      * @param email  user email address
      * @param mobile user valid mobile number
+     * @param pass
      */
-    private void requestForSMS(final String name, final String email, final String mobile, final String token) {
+    private void requestForSMS(final String name, final String email, final String mobile, final String token, String pass) {
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("name", name);
         params.put("email", email);
         params.put("mobile", mobile);
         params.put("token", token);
+        params.put("password", pass);
         relativeLayoutOtp.setVisibility(View.VISIBLE);
         relativeLayoutSignup.setVisibility(View.GONE);
 
