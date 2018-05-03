@@ -27,12 +27,13 @@
             android:typeface="sans" />
 
         <TextView
+            android:padding="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/ubuntu_bold"
             android:gravity="center"
-            android:text="@string/lorem_ipsum"
+            android:text="We offer variety of technology solutions to grow your business. At sumuni Technologies,we don't just build applications, we take time to understand your business and build something robust, scalable which solves your needs"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="18sp"

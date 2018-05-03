@@ -108,8 +108,8 @@
                                     android:layout_height="wrap_content"
                                     android:drawableLeft="@drawable/ic_person_black_24dp"
                                     android:drawableTint="@color/colorPrimaryDark"
-                                    android:hint="Phone"
-                                    android:inputType="phone"
+                                    android:hint="Email or Phone"
+
                                     android:singleLine="true" />
                             </android.support.design.widget.TextInputLayout>
 
@@ -135,6 +135,7 @@
 
 
                             <TextView
+                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"

@@ -113,11 +113,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
-                                    android:fontFamily="@font/ubuntu_bold"
                                     android:hint="@string/first_name_hint"
                                     android:inputType="textPersonName"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:typeface="sans" />
+                                    />
                             </android.support.design.widget.TextInputLayout>
 
                             <android.support.design.widget.TextInputLayout
@@ -133,11 +132,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
-                                    android:fontFamily="@font/ubuntu_bold"
                                     android:hint="@string/last_name_hint"
                                     android:inputType="textPersonName"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:typeface="sans" />
+                                     />
                             </android.support.design.widget.TextInputLayout>
 
                         </LinearLayout>
@@ -155,11 +153,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:fontFamily="@font/ubuntu_bold"
                                 android:hint="@string/email_hint"
                                 android:inputType="textEmailAddress"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:typeface="sans" />
+                                />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
@@ -174,11 +171,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:fontFamily="@font/ubuntu_bold"
-                                android:hint="Mobile"
+                               android:hint="Mobile"
                                 android:inputType="phone"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:typeface="sans" />
+                               />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
@@ -197,12 +193,11 @@
                                 android:layout_marginTop="4dp"
                                 android:drawableLeft="@drawable/ic_lock_black_24dp"
                                 android:drawableTint="@color/colorPrimaryDark"
-                                android:fontFamily="@font/ubuntu_bold"
-                                android:hint="@string/password"
+                               android:hint="@string/password"
                                 android:inputType="textPassword"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textStyle="bold"
-                                android:typeface="sans" />
+
+                                 />
                         </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
@@ -220,12 +215,10 @@
                                 android:layout_marginTop="4dp"
                                 android:drawableLeft="@drawable/ic_lock_black_24dp"
                                 android:drawableTint="@color/colorPrimaryDark"
-                                android:fontFamily="@font/ubuntu_bold"
                                 android:hint="@string/confirm_password"
                                 android:inputType="textPassword"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textStyle="bold"
-                                android:typeface="sans" />
+                                />
                         </android.support.design.widget.TextInputLayout>
 
                         <Button
