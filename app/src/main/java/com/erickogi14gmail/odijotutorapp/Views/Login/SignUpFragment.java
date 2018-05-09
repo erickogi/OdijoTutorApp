@@ -24,16 +24,23 @@ import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 import com.erickogi14gmail.odijotutorapp.Configs;
+import com.erickogi14gmail.odijotutorapp.Data.Models.Subjects;
 import com.erickogi14gmail.odijotutorapp.Data.Network.DumbVolleyRequest;
 import com.erickogi14gmail.odijotutorapp.Data.Network.RequestListener;
 import com.erickogi14gmail.odijotutorapp.Firebase.SharedPrefManager;
 import com.erickogi14gmail.odijotutorapp.Helper.PrefManager;
 import com.erickogi14gmail.odijotutorapp.R;
 import com.erickogi14gmail.odijotutorapp.service.HttpService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -245,6 +252,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         params.put("mobile", mobile);
         params.put("token", token);
         params.put("password", pass);
+        params.put("user", "TUTOR");
         relativeLayoutOtp.setVisibility(View.VISIBLE);
         relativeLayoutSignup.setVisibility(View.GONE);
 
@@ -252,6 +260,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         dumbVolleyRequest.getPostData(Configs.REGISTER_URL, params, new RequestListener() {
             @Override
             public void onError(VolleyError error) {
+                Log.d("regee", error.toString());
                 alertDialog("Error registering you please try again");
             }
 
@@ -262,6 +271,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onSuccess(String response) {
+                Log.d("regee", response);
+
                 try {
                     JSONObject responseObj = new JSONObject(response);
                     boolean error = responseObj.getBoolean("error");
@@ -283,6 +294,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.d("regee", e.toString());
+
                     alertDialog("Error registering you please try again");
 
                     progressDialog.dismiss();
@@ -429,5 +442,247 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void requestLoginTutor(final String mobile, final String pass) {
+        Map<String, String> params = new HashMap<String, String>();
+
+        params.put("mobile", mobile);
+        params.put("user", "TUTOR");
+        params.put("password", pass);
+
+
+        dumbVolleyRequest.getPostData(Configs.LOGIN_URL, params, new RequestListener() {
+            @Override
+            public void onError(VolleyError error) {
+                //controller.toast("Error Login In Please Try Again", getContext(), R.drawable.ic_error_outline_black_24dp);
+
+
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                // controller.toast("Error Login In Please Try Again", getContext(), R.drawable.ic_error_outline_black_24dp);
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                try {
+                    JSONObject responseObj = new JSONObject(response);
+                    if (progressDialog != null && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                    // Parsing json object response
+                    // response will be a json object
+                    boolean error = responseObj.getBoolean("error");
+                    //  String message = responseObj.getString("message");
+
+                    // checking for error, if not error SMS is initiated
+                    // device should receive it shortly
+                    if (!error) {
+
+                        JSONObject profileObj = responseObj.getJSONObject("profile");
+
+                        String name = profileObj.getString("name");
+
+                        String email = profileObj.getString("email");
+
+                        String mobile = profileObj.getString("mobile");
+
+                        String api = profileObj.getString("apikey");
+                        String ZONE = profileObj.getString("zone");
+                        String description = profileObj.getString("description");
+                        String image = profileObj.getString("image");
+                        String workhrs = profileObj.getString("working_hours");
+                        String id = profileObj.getString("id");
+
+
+                        String a = null;
+
+
+                        PrefManager pref = new PrefManager(getContext());
+                        pref.createLogin(name, email, mobile, ZONE, description, workhrs, id);
+
+                        try {
+                            // JSONObject jObj = new JSONObject(response);
+                            // JSONObject jsonArray = profileObj.getJSONObject("subjects");
+                            JSONArray jsonArray1 = responseObj.getJSONArray("subjects");
+                            Log.d("subjects", jsonArray1.toString());
+                            //jsonArray=profileObj.getString("subjects");
+                            String l = jsonArray1.toString();
+                            Gson gson = new Gson();
+                            Type collectionType = new TypeToken<Collection<Subjects>>() {
+
+                            }.getType();
+                            ArrayList<Subjects> subjectses1 = new ArrayList<>();
+                            subjectses1 = gson.fromJson(l, collectionType);
+                            pref.saveSubjects(subjectses1);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("catch", e.getMessage());
+                        }
+
+
+                        //startActivity(new Intent(getContext(), MainActivity.class));
+                        //getActivity().finish();
+                        //getThumbnail(image, name);
+
+
+                        // Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        //  progressDialog.dismiss();
+                        // alertDialogDelete("Error Login In .\nIf you don't have an account ,\ncreate One first");
+
+                        String message = responseObj.getString("error");
+
+
+                    }
+
+
+                    // progressDialog.dismiss();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d("ERRRRR", e.toString());
+                    // alertDialogDelete("Error Login In .\nIf you don't have an account ,\ncreate One first");
+
+                    // progressDialog.dismiss();
+                }
+            }
+        });
+
+//        StringRequest strReq = new StringRequest(Request.Method.POST,
+//                Configs.LOGIN_URL, new Response.Listener<String>() {
+//
+//            @Override
+//            public void onResponse(String response) {
+//                // Log.d("response", response.toString());
+//
+//                // dialoge.show();
+//                try {
+//                    JSONObject responseObj = new JSONObject(response);
+//
+//                    // Parsing json object response
+//                    // response will be a json object
+//                    boolean error = responseObj.getBoolean("error");
+//                    //  String message = responseObj.getString("message");
+//
+//                    // checking for error, if not error SMS is initiated
+//                    // device should receive it shortly
+//                    if (!error) {
+//                        JSONObject profileObj = responseObj.getJSONObject("profile");
+//
+//                        String name = profileObj.getString("name");
+//
+//                        String email = profileObj.getString("email");
+//
+//                        String mobile = profileObj.getString("mobile");
+//
+//                        String api = profileObj.getString("apikey");
+//                        String ZONE = profileObj.getString("zone");
+//                        String description = profileObj.getString("description");
+//                        String image = profileObj.getString("image");
+//                        String workhrs = profileObj.getString("working_hours");
+//                        String id = profileObj.getString("id");
+//
+//
+//                        String a = null;
+//
+//
+//                        PrefManager pref = new PrefManager(getContext());
+//                        pref.createLogin(name, email, mobile, ZONE, description, workhrs, id);
+//
+//                        try {
+//                            // JSONObject jObj = new JSONObject(response);
+//                            // JSONObject jsonArray = profileObj.getJSONObject("subjects");
+//                            JSONArray jsonArray1 = responseObj.getJSONArray("subjects");
+//                            Log.d("subjects", jsonArray1.toString());
+//                            //jsonArray=profileObj.getString("subjects");
+//                            String l = jsonArray1.toString();
+//                            Gson gson = new Gson();
+//                            Type collectionType = new TypeToken<Collection<Subjects>>() {
+//
+//                            }.getType();
+//                            ArrayList<Subjects> subjectses1 = new ArrayList<>();
+//                            subjectses1 = gson.fromJson(l, collectionType);
+//                            pref.saveSubjects(subjectses1);
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                            Log.d("catch", e.getMessage());
+//                        }
+//
+//
+//                        //startActivity(new Intent(getContext(), MainActivity.class));
+//                        //getActivity().finish();
+//                        getThumbnail(image, name);
+//
+//
+//                        // Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+//
+//                    } else {
+//                        Toast.makeText(getActivity(), "Error Login In .\n If you don't have an account ,create One first", Toast.LENGTH_LONG).show();
+//                        String message = responseObj.getString("error");
+//
+//                        //Toast.makeText(getContext(),
+//                        //       "Error: " + message,
+//                        //      Toast.LENGTH_LONG).show();
+//
+//                    }
+//
+//                    // hiding the progress bar
+//                    progressDialog.dismiss();
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Log.d("ERRRRR", e.toString());
+//                    Toast.makeText(getContext(),
+//                            "Error: " + e.getMessage(),
+//                            Toast.LENGTH_LONG).show();
+//
+//                    progressDialog.dismiss();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("error", "Error: " + error.getMessage());
+//                Toast.makeText(getContext(),
+//                        error.getMessage(), Toast.LENGTH_SHORT).show();
+//                progressDialog.dismiss();
+//                //progressBar.setVisibility(View.GONE);
+//            }
+//        }) {
+//
+//            /**
+//             * Passing user parameters to our server
+//             * @return
+//             */
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//
+//                params.put("mobile", mobile);
+//                params.put("user", "TUTOR");
+//
+//                Log.e("posting params", "Posting params: " + params.toString());
+//
+//                return params;
+//            }
+//
+//        };
+//
+//        // Adding request to request queue
+//        MyApplication.getInstance().addToRequestQueue(strReq);
+    }
 
 }

@@ -46,7 +46,9 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
+        <service
+            android:name=".service.HttpService"
+            android:exported="false" />
         <!-- Intent service -->
 
         <service android:name=".Firebase.MyFirebaseInstanceIDService">

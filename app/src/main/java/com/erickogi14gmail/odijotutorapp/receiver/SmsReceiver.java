@@ -14,7 +14,7 @@ import com.erickogi14gmail.odijotutorapp.Configs;
  */
 
 public class SmsReceiver extends BroadcastReceiver {
-    private static final String TAG = SmsReceiver.class.getSimpleName();
+    private static final String TAG = "smsrec";
 
     @Override
     public void onReceive(Context context, Intent intent) {
